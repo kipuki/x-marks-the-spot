@@ -25,7 +25,7 @@ public class CanonControl : MonoBehaviour
 
     private float initialX;
 
-    private int rotationSpeed = 1;
+    private int rotationSpeed = 60;
 
     private PlayerController occupyingPlayer;
 
@@ -48,7 +48,7 @@ public class CanonControl : MonoBehaviour
 
             // Get button better than GetButtonDown because it always return true while rotated.
             if (Input.GetButton("Horizontal"))
-                horizontalRigid.transform.Rotate(0,Input.GetAxis("Horizontal")*rotationSpeed,0, Space.World);
+                horizontalRigid.transform.Rotate(0,Input.GetAxis("Horizontal")*rotationSpeed * Time.deltaTime,0, Space.World);
             if (verticalRigid && Input.GetButton("Vertical"))
             {
                 float angleX = verticalRigid.transform.eulerAngles.x;
@@ -59,7 +59,7 @@ public class CanonControl : MonoBehaviour
 
                 // Debug.Log(angleX);
 
-                float newRotationX = (verticalInputAxis*rotationSpeed) + angleX;
+                float newRotationX = (verticalInputAxis*rotationSpeed * Time.deltaTime) + angleX;
 
                 if (newRotationX <= 0 && newRotationX >= -40)
                     newRotationX -= angleX;
