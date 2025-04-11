@@ -24858,5 +24858,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: CannonCart
       objectReference: {fileID: 0}
+    - target: {fileID: 8817982174712444987, guid: 516a4ca6831c73d99a10985a44f9e298,
+        type: 3}
+      propertyPath: checkpointSpawnPosition.x
+      value: 390
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817982174712444987, guid: 516a4ca6831c73d99a10985a44f9e298,
+        type: 3}
+      propertyPath: checkpointSpawnPosition.y
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817982174712444987, guid: 516a4ca6831c73d99a10985a44f9e298,
+        type: 3}
+      propertyPath: checkpointSpawnPosition.z
+      value: 424
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516a4ca6831c73d99a10985a44f9e298, type: 3}

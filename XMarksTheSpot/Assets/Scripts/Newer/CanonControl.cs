@@ -31,6 +31,8 @@ public class CanonControl : MonoBehaviour
 
     private bool canFire = true;
 
+    public Vector3 checkpointSpawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,8 +120,8 @@ public class CanonControl : MonoBehaviour
         // Enable character controller.
         occupyingPlayer.transform.parent = null;
         occupyingPlayer.enableCharacter();
+        occupyingPlayer.SendMessage("setSpawn", checkpointSpawnPosition);
         occupyingPlayer = null;
-        
         // (gameObject.GetComponent<InteractTrigger>() as MonoBehaviour).enabled = true;
         // gameObject.GetComponent<CapsuleCollider>().enabled = true;
     }
