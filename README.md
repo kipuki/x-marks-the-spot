@@ -1,7 +1,7 @@
 # X Marks the Spot
 ### Overview
 
-X Marks the Spot was my first game developed in Unity in 2022-2023. The project served as a way to demonstrate my ability to create a polished, optimized game experience. The game utilizes various Unity technologies, such as occlusion culling and LOD (Level of Detail), to ensure smooth performance and a visually appealing experience.
+X Marks the Spot was my first game developed in Unity in 2022-2023 (Updated in 2025). The project served as a way to demonstrate my ability to create a polished, optimized game experience. The game utilizes various Unity technologies, such as occlusion culling and LOD (Level of Detail), to ensure smooth performance and a visually appealing experience.
 
 The game is an adventure where the player embarks on a quest to find a buried treasure on a mysterious island. Along the way, the player will encounter obstacles, collect gems while climbing the mountain, and navigate a perilous tunnel filled with traps. The ultimate goal is to find and unearth the treasure hidden at the top.
 
