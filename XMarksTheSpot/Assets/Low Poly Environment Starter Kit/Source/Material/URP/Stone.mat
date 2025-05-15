@@ -10,6 +10,8 @@ Material:
   m_Name: Stone
   m_Shader: {fileID: -6465566751694194690, guid: 34bf62139380ab746a7f1308f87321db,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,7 +19,9 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,6 +64,7 @@ Material:
     - Vector2_b3499b7416b64762a92801fd1a260104: {r: 1.74, g: 0, b: 0, a: 0}
     - Vector2_d1261ba7c1e140be8ca68486b05912b4: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &3541903913986723636
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -72,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 9
