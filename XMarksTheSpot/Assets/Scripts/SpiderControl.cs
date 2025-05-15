@@ -63,7 +63,7 @@ public class SpiderControl : MonoBehaviour
         web.transform.localScale *= webSize;
         web.transform.LookAt(playerTransform.position);
         web.name = "web";
-        web.velocity = web.transform.forward  * webSpeed * UserSettings.getDifficultyMultiplier();
+        web.linearVelocity = web.transform.forward  * webSpeed * UserSettings.getDifficultyMultiplier();
         // Setting damage at the end as last priority
         web.GetComponent<SpiderWeb>().damage = webDamage;
         web.GetComponent<SpiderWeb>().speedDebuff = speedDebuff;
