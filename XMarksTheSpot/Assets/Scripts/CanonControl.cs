@@ -155,7 +155,7 @@ public class CanonControl : MonoBehaviour
             // Debug.Log(launcher.transform.rotation);
             cannonball.name = "cannonball";
             cannonball.useGravity = true;
-            cannonball.velocity = launcher.transform.forward  * cannonBallVelocity;
+            cannonball.linearVelocity = launcher.transform.forward  * cannonBallVelocity;
             // Disable collision with FPS controller because FPS controller could be in the way.
             Physics.IgnoreCollision(occupyingPlayer.GetComponent<Collider>(), cannonball.GetComponent<Collider>(), true);
             Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), cannonball.GetComponent<Collider>(), true);
