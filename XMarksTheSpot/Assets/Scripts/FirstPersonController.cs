@@ -1,20 +1,21 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityEngine.InputSystem;
+
 
 #pragma warning disable 618, 649
 namespace UnityStandardAssets.Characters.FirstPerson
 {
-    [RequireComponent(typeof (CharacterController))]
-    [RequireComponent(typeof (AudioSource))]
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(AudioSource))]
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private bool m_IsWalking;
         [SerializeField] public float m_WalkSpeed;
         [SerializeField] public float m_RunSpeed;
-        [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
+        [SerializeField][Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] public float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
@@ -46,19 +47,44 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 slopeSlideVelocity;
         private bool isSliding;
 
+        private PlayerControls controls;
+
         // Use this for initialization
         private void Start()
         {
             m_CharacterController = GetComponent<CharacterController>();
-            m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
             m_FovKick.Setup(m_Camera);
             m_HeadBob.Setup(m_Camera, m_StepInterval);
             m_StepCycle = 0f;
-            m_NextStep = m_StepCycle/2f;
+            m_NextStep = m_StepCycle / 2f;
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
-			m_MouseLook.Init(transform , m_Camera.transform);
+        }
+
+        private void Awake()
+        {
+            controls = new PlayerControls();
+            controls.Player.Move.performed += ctx => m_Input = ctx.ReadValue<Vector2>();
+            controls.Player.Move.canceled += ctx => m_Input = Vector2.zero;
+
+            controls.Player.Jump.performed += ctx => m_Jump = true;
+            controls.Player.Jump.canceled += ctx => m_Jump = false;
+
+            m_Camera = Camera.main;
+            m_MouseLook.Init(controls, transform, m_Camera.transform);
+        }
+
+        private void OnEnable()
+        {
+            controls.Player.Enable();
+            m_MouseLook.Enable();
+        }
+
+        private void OnDisable()
+        {
+            controls.Player.Disable();
+            m_MouseLook.Disable();
         }
 
 
@@ -68,11 +94,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             SetSlopeSlideVelocity();
             isSliding = slopeSlideVelocity != Vector3.zero;
             RotateView();
-            // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-            }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -104,16 +125,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float speed;
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+                               m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            m_MoveDir.x = desiredMove.x * speed;
+            m_MoveDir.z = desiredMove.z * speed;
 
 
             if (m_CharacterController.isGrounded)
@@ -124,20 +145,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 {
                     m_MoveDir.y = m_JumpSpeed;
                     PlayJumpSound();
-                    m_Jump = false;
                     m_Jumping = true;
                 }
             }
             else //if (!isSliding)
             {
-                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
+                m_MoveDir += Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
             }
             if (!isSliding)
-                m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
-            else {
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+            else
+            {
                 Vector3 velocity = slopeSlideVelocity;
                 velocity.y = m_MoveDir.y;
-                m_CollisionFlags = m_CharacterController.Move(velocity*Time.fixedDeltaTime);
+                m_CollisionFlags = m_CharacterController.Move(velocity * Time.fixedDeltaTime);
             }
 
             ProgressStepCycle(speed);
@@ -148,29 +169,29 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 
         private void SetSlopeSlideVelocity()
-    {
-        if (Physics.Raycast(transform.position+Vector3.up, Vector3.down, out RaycastHit hitInfo, 5, LayerMask.GetMask("Ground")))
         {
-            float angle = Vector3.Angle(hitInfo.normal, Vector3.up);
-
-            if (angle >= m_CharacterController.slopeLimit)
+            if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hitInfo, 5, LayerMask.GetMask("Ground")))
             {
-                // Debug.Log("Updated slip");
-                slopeSlideVelocity = Vector3.ProjectOnPlane(new Vector3(0, m_MoveDir.y*m_GravityMultiplier, 0), hitInfo.normal);
-                return;
+                float angle = Vector3.Angle(hitInfo.normal, Vector3.up);
+
+                if (angle >= m_CharacterController.slopeLimit)
+                {
+                    // Debug.Log("Updated slip");
+                    slopeSlideVelocity = Vector3.ProjectOnPlane(new Vector3(0, m_MoveDir.y * m_GravityMultiplier, 0), hitInfo.normal);
+                    return;
+                }
             }
+
+            if (isSliding)
+            {
+                slopeSlideVelocity -= slopeSlideVelocity * Time.deltaTime * 3;
+
+                if (slopeSlideVelocity.magnitude > 1)
+                    return;
+            }
+
+            slopeSlideVelocity = Vector3.zero;
         }
-
-        if (isSliding)
-        {
-            slopeSlideVelocity -= slopeSlideVelocity * Time.deltaTime * 3;
-
-            if (slopeSlideVelocity.magnitude > 1)
-                return;
-        }
-
-        slopeSlideVelocity = Vector3.zero;
-    }
 
         private void PlayJumpSound()
         {
@@ -183,7 +204,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
             {
-                m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
+                m_StepCycle += (m_CharacterController.velocity.magnitude + (speed * (m_IsWalking ? 1f : m_RunstepLenghten))) *
                              Time.fixedDeltaTime;
             }
 
@@ -226,7 +247,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Camera.transform.localPosition =
                     m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-                                      (speed*(m_IsWalking ? 1f : m_RunstepLenghten)));
+                                      (speed * (m_IsWalking ? 1f : m_RunstepLenghten)));
                 newCameraPosition = m_Camera.transform.localPosition;
                 newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
             }
@@ -241,10 +262,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
-            // Read input
-            float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
-
             bool waswalking = m_IsWalking;
 
 #if !MOBILE_INPUT
@@ -254,7 +271,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
-            m_Input = new Vector2(horizontal, vertical);
+            // m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
             if (m_Input.sqrMagnitude > 1)
@@ -274,7 +291,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            // m_MouseLook.LookRotation(transform, m_Camera.transform);
         }
 
 
@@ -291,7 +308,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-            body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
+            body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
         }
     }
 }

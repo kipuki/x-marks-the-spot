@@ -1,14 +1,13 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.InputSystem;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     [Serializable]
     public class MouseLook
     {
-        public float XSensitivity = 2f;
-        public float YSensitivity = 2f;
+        public Vector2 sensitivity = new Vector2(0.1f, 0.1f);
         public bool clampVerticalRotation = true;
         public float MinimumX = -90F;
         public float MaximumX = 90F;
@@ -16,40 +15,80 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float smoothTime = 5f;
         public bool lockCursor = true;
 
-
+        private Transform m_CharacterTransform;
+        private Transform m_CameraTransform;
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
+        private PlayerControls m_PlayerControls;
         private bool m_cursorIsLocked = true;
 
-        public void Init(Transform character, Transform camera)
+        private System.Action<InputAction.CallbackContext> m_OnLookPerformed;
+        private System.Action<InputAction.CallbackContext> m_OnLookCanceled;
+
+        public void Init(PlayerControls controls, Transform character, Transform camera)
         {
+            DisconnectEvents();
+            m_PlayerControls = controls;
+            m_CharacterTransform = character;
+            m_CameraTransform = camera;
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
+
+            m_OnLookPerformed = ctx => LookRotation(ctx.ReadValue<Vector2>());
+            m_OnLookCanceled = ctx => LookRotation(ctx.ReadValue<Vector2>());
+        }
+
+        private void ConnectEvents()
+        {
+            if (m_PlayerControls == null)
+                return;
+            m_PlayerControls.Player.Look.performed += m_OnLookPerformed;
+            m_PlayerControls.Player.Look.canceled += m_OnLookCanceled;
+        }
+
+        private void DisconnectEvents()
+        {
+            if (m_PlayerControls == null)
+                return;
+            m_PlayerControls.Player.Look.performed -= m_OnLookPerformed;
+            m_PlayerControls.Player.Look.canceled -= m_OnLookCanceled;
+        }
+
+        public void Enable()
+        {
+            ConnectEvents();
+        }
+
+        public void Disable()
+        {
+            DisconnectEvents();
         }
 
 
-        public void LookRotation(Transform character, Transform camera)
+        public void LookRotation(Vector2 lookDelta)
         {
-            float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
-            float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
+            lookDelta *= sensitivity;
 
-            m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
-            m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
+            float yRot = lookDelta.x;
+            float xRot = lookDelta.y;
 
-            if(clampVerticalRotation)
-                m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
+            m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+            m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
-            if(smooth)
+            if (clampVerticalRotation)
+                m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);
+
+            if (smooth)
             {
-                character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
+                m_CharacterTransform.localRotation = Quaternion.Slerp(m_CharacterTransform.localRotation, m_CharacterTargetRot,
                     smoothTime * Time.deltaTime);
-                camera.localRotation = Quaternion.Slerp (camera.localRotation, m_CameraTargetRot,
+                m_CameraTransform.localRotation = Quaternion.Slerp(m_CameraTransform.localRotation, m_CameraTargetRot,
                     smoothTime * Time.deltaTime);
             }
             else
             {
-                character.localRotation = m_CharacterTargetRot;
-                camera.localRotation = m_CameraTargetRot;
+                m_CharacterTransform.localRotation = m_CharacterTargetRot;
+                m_CameraTransform.localRotation = m_CameraTargetRot;
             }
 
             UpdateCursorLock();
