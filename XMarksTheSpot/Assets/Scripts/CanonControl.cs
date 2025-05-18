@@ -122,8 +122,6 @@ public class CanonControl : MonoBehaviour
         occupyingPlayer.enableCharacter();
         occupyingPlayer.SendMessage("setSpawn", checkpointSpawnPosition);
         occupyingPlayer = null;
-        // (gameObject.GetComponent<InteractTrigger>() as MonoBehaviour).enabled = true;
-        // gameObject.GetComponent<CapsuleCollider>().enabled = true;
     }
 
 
