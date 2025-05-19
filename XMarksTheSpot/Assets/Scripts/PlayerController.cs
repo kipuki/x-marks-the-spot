@@ -70,13 +70,6 @@ public class PlayerController : MonoBehaviour, TouchesWater
         points = 0;
         hasBoatKey = false;
         isDebuffed = false;
-        // AudioSource backgroundMusic = GetComponentInChildren<AudioSource>();
-        // backgroundMusic.volume = UserSettings.getMusicVolume();
-        // AudioListener.volume = UserSettings.getMasterVolume();
-        // AudioSource[] components = GameObject.FindObjectsOfType<AudioSource>();
-        // foreach (AudioSource component in components)
-        //     if (component != backgroundMusic)
-        //         component.volume = UserSettings.getSFXVolume();
     }
 
 
@@ -93,42 +86,11 @@ public class PlayerController : MonoBehaviour, TouchesWater
     void Update()
     {
 
-        // RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, 150.0f);
-        // for (int i = 0; i < hits.Length; i++)
-        // {
-        //     RaycastHit hit = hits[i];
-        //     Debug.Log(hit.collider.gameObject.name);
-        //     if (hit.collider.gameObject.tag == "Boat")
-        //     {
-        //         if (hasBoatKey)
-        //             textHints.SendMessage("showHint", "I should use the boat to get to the mountain...");
-        //         else
-        //             textHints.SendMessage("showHint", "I should use the boat to get to the mountain... But where did I put the keys?");
-        //         break;
-        //     } else if (hit.collider.gameObject.name=="blockade")
-        //     {
-        //         textHints.SendMessage("showHint", "Seems the entrance was blocked off. Maybe if I use that cannon over there...");
-        //     }
-        // }
 
         RaycastHit hit;
-        // bool ray = Physics.Raycast (transform.GetChild(0).position, transform.GetChild(0).forward, out hit, 100);
-        // bool ray = Physics.Raycast (transform.GetChild(0).GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f,0.5f,0)), out hit);
 
         if(Physics.Raycast (transform.GetChild(0).position, transform.GetChild(0).forward, out hit, 100, layerMask))
         {
-            // if (hit.collider.gameObject.tag == "Boat")
-            // {
-            //     if (hasBoatKey)
-            //         textHints.SendMessage("showHint", "I should use the boat to get to the mountain...");
-            //     else
-            //         textHints.SendMessage("showHint", "I should use the boat to get to the mountain... But where did I put the keys?");
-
-            // } else if (hit.collider.gameObject.name=="blockade")
-            // {
-            //     textHints.SendMessage("showHint", "Seems the entrance was blocked off. Maybe if I use that cannon over there...");
-            // }
-            // Debug.Log(hit.collider.gameObject.name);
             switch(hit.collider.gameObject.name)
             {
                 case "Boat":

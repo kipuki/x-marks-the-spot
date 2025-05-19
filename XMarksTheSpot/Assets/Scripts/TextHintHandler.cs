@@ -21,19 +21,6 @@ public class TextHintHandler : MonoBehaviour {
         textDisplay = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         mainTextHintHandler = this;
 	}
-	
-	void Update () {
-        // As taught in lectures, best to use coroutine! :)
-        // if (gameObject.GetComponent<Text>().enabled)
-        // {
-        //     timer += Time.deltaTime;
-        //     if(timer >= 4)
-        //     {
-        //         gameObject.GetComponent<Text>().enabled = false;
-        //         timer = 0.0f;
-        //     }
-        // }
-	}
 
     public void setHint(string message)
     {

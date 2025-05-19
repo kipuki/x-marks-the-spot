@@ -17,20 +17,6 @@ public class Cannonball : MonoBehaviour
         
     }
 
-    // void OnCollisionEnter(Collision theObject)
-    // {
-    //     if (theObject.collider.gameObject.name == "Water")
-    //         return;
-    //     // gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-    //         ParticleSystem particleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
-    //         // Set particle to root
-    //         particleSystem.transform.parent = null;
-    //         particleSystem.Play();
-    //         // Cleanup particle object after completion
-    //         Destroy(particleSystem, particleSystem.main.duration);
-    //         Destroy(gameObject);
-    // }
-
     public void destroyCannonball()
     {
         ParticleSystem particleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
