@@ -28,7 +28,7 @@ public class CanonControl : MonoBehaviour
 
     private PlayerController occupyingPlayer;
 
-    private bool canFire = true;
+    private bool canFire = false;
 
     private bool shouldFireCannon = false;
     private bool shouldRotate = false;
@@ -141,6 +141,7 @@ public class CanonControl : MonoBehaviour
     {
         // Set occupying player
         occupyingPlayer = PlayerController.mainController;
+        canFire = true;
 
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         canonCamera.enabled = true;
