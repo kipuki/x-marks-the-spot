@@ -23,6 +23,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool shouldRotate = false;
         private float yRot = 0;
         private float xRot = 0;
+        private InputAction lookUnlockAction;
+        private InputAction lookLockAction;
 
         private System.Action<InputAction.CallbackContext> m_OnLookPerformed;
         private System.Action<InputAction.CallbackContext> m_OnLookCanceled;
@@ -36,6 +38,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
 
+            lookUnlockAction = m_PlayerControls.Player.UnlockCursor;
+            lookLockAction = m_PlayerControls.Player.LockCursor;
+
             m_OnLookPerformed = ctx => shouldRotate = true;
             m_OnLookCanceled = ctx => shouldRotate = false;
         }
@@ -44,14 +49,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (m_PlayerControls == null)
                 return;
+
             m_PlayerControls.Player.Look.performed += m_OnLookPerformed;
             m_PlayerControls.Player.Look.canceled += m_OnLookCanceled;
+
+            lookUnlockAction.performed += ctx => m_cursorIsLocked = false;
+            lookLockAction.performed += ctx => m_cursorIsLocked = true;
         }
 
         private void DisconnectEvents()
         {
             if (m_PlayerControls == null)
                 return;
+
+            lookUnlockAction.performed -= ctx => m_cursorIsLocked = false;
+            lookLockAction.performed -= ctx => m_cursorIsLocked = true;
+
             m_PlayerControls.Player.Look.performed -= m_OnLookPerformed;
             m_PlayerControls.Player.Look.canceled -= m_OnLookCanceled;
         }
@@ -120,21 +133,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void InternalLockUpdate()
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
-            {
-                m_cursorIsLocked = false;
-            }
-            else if(Input.GetMouseButtonUp(0))
-            {
-                m_cursorIsLocked = true;
-            }
-
             if (m_cursorIsLocked)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-            else if (!m_cursorIsLocked)
+            else
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
