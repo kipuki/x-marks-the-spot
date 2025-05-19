@@ -38,8 +38,6 @@ public class BreakableWall : MonoBehaviour
             }
             onWallBreak.Invoke();
             gameObject.GetComponent<AudioSource>().Play();
-            TextHintHandler.showHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
-            // (transform.parent.GetComponent("TidyObject") as MonoBehaviour).enabled = true;
         }
     }
 }

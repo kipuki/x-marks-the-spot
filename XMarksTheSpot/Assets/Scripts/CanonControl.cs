@@ -37,6 +37,44 @@ public class CanonControl : MonoBehaviour
 
     private Vector2 rotationInput;
 
+    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadRotateToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    {
+        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
+        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"playstation-left-stick\"> <sprite name=\"playstation-dpad\">" },
+        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
+    };
+
+    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadFireToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    {
+        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"gamepad-a-colored\">" },
+        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"gamepad-cross-colored\">" },
+        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"gamepad-b-colored\">" },
+    };
+
+    private string GetRotateHintSprite()
+    {
+        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
+            return "<sprite name=\"keyboard-wasd\"> <sprite name=\"keyboard-arrow-keys\">";
+
+
+        if (gamepadRotateToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+            return hint;
+
+        return "Unknown";
+    }
+
+    private string GetFireHintSprite()
+    {
+        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
+            return "<sprite name=\"keyboard-Space\">";
+
+
+        if (gamepadFireToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+            return hint;
+
+        return "Unknown";
+    }
+
     void Awake()
     {
         inputController = new PlayerControls();
@@ -114,6 +152,8 @@ public class CanonControl : MonoBehaviour
 
     public void exitCannon()
     {
+        ActiveDeviceManager.onDeviceChangedStatic -= showInstructionText;
+        TextHintHandler.showHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
         StartCoroutine(exitCannon(6));
     }
 
@@ -136,6 +176,13 @@ public class CanonControl : MonoBehaviour
         occupyingPlayer = null;
     }
 
+    private void showInstructionText()
+    {
+        string rotateHint = GetRotateHintSprite();
+        string fireHint = GetFireHintSprite();
+
+        TextHintHandler.showHint(new TextHint($"Rotate the cannon with {rotateHint} then press {fireHint} to fire", 1, null));
+    }
 
     public void controlCanon()
     {
@@ -145,15 +192,18 @@ public class CanonControl : MonoBehaviour
 
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         canonCamera.enabled = true;
-        
+
         playerCamera = occupyingPlayer.getCamera();
         playerCamera.enabled = false;
 
         // Disable character controller.
         occupyingPlayer.disableCharacter();
-    
+
         crosshair.enabled = true;
         occupyingPlayer.transform.parent = gameObject.transform;
+
+        ActiveDeviceManager.onDeviceChangedStatic += showInstructionText;
+        showInstructionText();
     }
 
     IEnumerator fireCannon()

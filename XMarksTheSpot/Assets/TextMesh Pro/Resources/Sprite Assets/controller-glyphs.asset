@@ -210,6 +210,116 @@ MonoBehaviour:
     m_GlyphIndex: 25
     m_Scale: 1
     m_Name: keyboard-wasd
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 26
+    m_Scale: 1
+    m_Name: gamepad-a
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 27
+    m_Scale: 1
+    m_Name: gamepad-a-colored
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 28
+    m_Scale: 1
+    m_Name: gamepad-a-colored-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 29
+    m_Scale: 1
+    m_Name: gamepad-a-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 30
+    m_Scale: 1
+    m_Name: gamepad-b
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 31
+    m_Scale: 1
+    m_Name: gamepad-b-colored
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 32
+    m_Scale: 1
+    m_Name: gamepad-b-colored-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 33
+    m_Scale: 1
+    m_Name: gamepad-b-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 34
+    m_Scale: 1
+    m_Name: gamepad-circle
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 35
+    m_Scale: 1
+    m_Name: gamepad-circle-colored
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 36
+    m_Scale: 1
+    m_Name: gamepad-circle-colored-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 37
+    m_Scale: 1
+    m_Name: gamepad-circle-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 38
+    m_Scale: 1
+    m_Name: gamepad-cross
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 39
+    m_Scale: 1
+    m_Name: gamepad-cross-colored
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 40
+    m_Scale: 1
+    m_Name: gamepad-cross-colored-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 41
+    m_Scale: 1
+    m_Name: gamepad-cross-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 42
+    m_Scale: 1
+    m_Name: gamepad-triangle
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 43
+    m_Scale: 1
+    m_Name: gamepad-triangle-colored
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 44
+    m_Scale: 1
+    m_Name: gamepad-triangle-colored-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 45
+    m_Scale: 1
+    m_Name: gamepad-triangle-inverted
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 46
+    m_Scale: 1
+    m_Name: keyboard-Space
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 47
+    m_Scale: 1
+    m_Name: keyboard-Space-inverted
   m_GlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -347,7 +457,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 512
+      m_X: 1024
       m_Y: 128
       m_Width: 64
       m_Height: 64
@@ -363,7 +473,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 576
+      m_X: 1088
       m_Y: 128
       m_Width: 64
       m_Height: 64
@@ -379,7 +489,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 640
+      m_X: 1152
       m_Y: 128
       m_Width: 64
       m_Height: 64
@@ -395,7 +505,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 704
+      m_X: 1216
       m_Y: 128
       m_Width: 64
       m_Height: 64
@@ -475,7 +585,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 512
+      m_X: 1024
       m_Y: 64
       m_Width: 64
       m_Height: 64
@@ -491,7 +601,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 576
+      m_X: 1088
       m_Y: 64
       m_Width: 64
       m_Height: 64
@@ -507,7 +617,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 640
+      m_X: 1152
       m_Y: 64
       m_Width: 64
       m_Height: 64
@@ -523,7 +633,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 704
+      m_X: 1216
       m_Y: 64
       m_Width: 64
       m_Height: 64
@@ -571,7 +681,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 512
+      m_X: 1024
       m_Y: 0
       m_Width: 64
       m_Height: 64
@@ -587,8 +697,8 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 576
-      m_Y: 0
+      m_X: 1088
+      m_Y: 1
       m_Width: 64
       m_Height: 64
     m_Scale: 1
@@ -603,7 +713,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 640
+      m_X: 1152
       m_Y: 0
       m_Width: 64
       m_Height: 64
@@ -619,7 +729,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 57.6
       m_HorizontalAdvance: 64
     m_GlyphRect:
-      m_X: 704
+      m_X: 1216
       m_Y: 0
       m_Width: 64
       m_Height: 64
@@ -627,5 +737,357 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 1676903179, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 26
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 512
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 2136760300, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 27
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 640
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1986462268, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 28
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 704
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1192310761, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 29
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 576
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1481446590, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 30
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 768
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -980361258, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 31
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 896
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -589202942, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 32
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 960
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1648440068, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 33
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 832
+      m_Y: 128
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1331082608, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 34
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 768
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1910509178, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 35
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 896
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 96093010, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 36
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 960
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -452600999, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 37
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 832
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1937271697, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 38
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 512
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1673616699, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 39
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 640
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 94061649, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 40
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 704
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -949024559, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 41
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 576
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1062973789, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 42
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 256
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -941621497, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 43
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 384
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1874298392, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 44
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 448
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -457446981, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 45
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 320
+      m_Y: 64
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1183924228, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 46
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 512
+      m_Y: 0
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -480701292, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
+  - m_Index: 47
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 57.6
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 576
+      m_Y: 0
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1665870497, guid: 5c9c9dbe44e9ccc48aa6992fae268b29, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
