@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerController : MonoBehaviour, TouchesWater
 {
 
     public static PlayerController mainController;
 
-    public Vector3 spawnLocation;
+    public Vector3 spawnPosition;
+    public Quaternion spawnRotation;
     private MonoBehaviour fpsController;
     private CharacterController charController;
     // public TMPro.TextMeshProUGUI textHints;
@@ -77,7 +77,8 @@ public class PlayerController : MonoBehaviour, TouchesWater
     void Start()
     {
         healthBar.value = health;
-        spawnLocation = transform.position;
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
         fpsController = (gameObject.GetComponent("FirstPersonController") as MonoBehaviour);
         charController = transform.GetComponent<CharacterController>();
     }
@@ -174,16 +175,22 @@ public class PlayerController : MonoBehaviour, TouchesWater
     {
         disableCharacter();
         health = 100;
-        transform.position = spawnLocation;
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
         fpsController.enabled = true;
         (fpsController as FirstPersonController).m_MoveDir = Vector2.zero;
         enableCharacter();
         healthBar.value = health;
     }
 
-    void setSpawn(Vector3 newSpawn)
+    void setSpawnPosition(Vector3 newSpawnPosition)
     {
-        spawnLocation = newSpawn;
+        spawnPosition = newSpawnPosition;
+    }
+
+    void setSpawnRotation(Quaternion newSpawnRotation)
+    {
+        spawnRotation = newSpawnRotation;
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

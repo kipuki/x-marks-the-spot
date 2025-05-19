@@ -36,7 +36,7 @@ public class BoatControl : MonoBehaviour
                 playerCamera.enabled = true;
                 boatCamera.enabled = false;
                 GameObject player = playerCamera.transform.parent.gameObject;
-                player.SendMessage("setSpawn", boatCamera.gameObject.transform.position);
+                player.SendMessage("setSpawnPosition", boatCamera.gameObject.transform.position);
                 player.SendMessage("respawn");
                 this.enabled = false;
             }
