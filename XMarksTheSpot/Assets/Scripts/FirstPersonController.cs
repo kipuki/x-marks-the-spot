@@ -42,6 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_StepCycle;
         private float m_NextStep;
         private bool m_Jumping;
+        private bool m_Sprinting;
         private AudioSource m_AudioSource;
 
         private Vector3 slopeSlideVelocity;
@@ -59,6 +60,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_StepCycle = 0f;
             m_NextStep = m_StepCycle / 2f;
             m_Jumping = false;
+            m_Sprinting = false;
             m_AudioSource = GetComponent<AudioSource>();
         }
 
@@ -70,6 +72,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             controls.Player.Jump.performed += ctx => m_Jump = true;
             controls.Player.Jump.canceled += ctx => m_Jump = false;
+            
+            controls.Player.Sprint.performed += ctx => m_Sprinting = !m_Sprinting;
 
             m_Camera = Camera.main;
             m_PlayerLook.Init(controls, transform, m_Camera.transform);
@@ -136,6 +140,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x * speed;
             m_MoveDir.z = desiredMove.z * speed;
 
+            if (m_MoveDir.x == 0 && m_MoveDir.z == 0)
+                m_Sprinting = false;
 
             if (m_CharacterController.isGrounded)
             {
@@ -267,7 +273,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            m_IsWalking = !m_Sprinting;
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
