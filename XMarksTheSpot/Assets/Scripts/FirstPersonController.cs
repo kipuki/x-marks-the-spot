@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] public float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
-        [SerializeField] private MouseLook m_MouseLook;
+        [SerializeField] private PlayerLook m_PlayerLook;
         [SerializeField] private bool m_UseFovKick;
         [SerializeField] private FOVKick m_FovKick = new FOVKick();
         [SerializeField] private bool m_UseHeadBob;
@@ -72,19 +72,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             controls.Player.Jump.canceled += ctx => m_Jump = false;
 
             m_Camera = Camera.main;
-            m_MouseLook.Init(controls, transform, m_Camera.transform);
+            m_PlayerLook.Init(controls, transform, m_Camera.transform);
         }
 
         private void OnEnable()
         {
             controls.Player.Enable();
-            m_MouseLook.Enable();
+            m_PlayerLook.Enable();
         }
 
         private void OnDisable()
         {
             controls.Player.Disable();
-            m_MouseLook.Disable();
+            m_PlayerLook.Disable();
         }
 
 
@@ -93,7 +93,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             SetSlopeSlideVelocity();
             isSliding = slopeSlideVelocity != Vector3.zero;
-            RotateView();
+            m_PlayerLook.Update();
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -164,7 +164,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);
 
-            m_MouseLook.UpdateCursorLock();
+            m_PlayerLook.UpdateCursorLock();
         }
 
 
@@ -287,13 +287,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
         }
-
-
-        private void RotateView()
-        {
-            // m_MouseLook.LookRotation(transform, m_Camera.transform);
-        }
-
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {

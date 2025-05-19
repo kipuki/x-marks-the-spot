@@ -5,9 +5,8 @@ using UnityEngine.InputSystem;
 namespace UnityStandardAssets.Characters.FirstPerson
 {
     [Serializable]
-    public class MouseLook
+    public class PlayerLook
     {
-        public Vector2 sensitivity = new Vector2(0.1f, 0.1f);
         public bool clampVerticalRotation = true;
         public float MinimumX = -90F;
         public float MaximumX = 90F;
@@ -21,6 +20,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Quaternion m_CameraTargetRot;
         private PlayerControls m_PlayerControls;
         private bool m_cursorIsLocked = true;
+        private bool shouldRotate = false;
+        private float yRot = 0;
+        private float xRot = 0;
 
         private System.Action<InputAction.CallbackContext> m_OnLookPerformed;
         private System.Action<InputAction.CallbackContext> m_OnLookCanceled;
@@ -34,8 +36,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CharacterTargetRot = character.localRotation;
             m_CameraTargetRot = camera.localRotation;
 
-            m_OnLookPerformed = ctx => LookRotation(ctx.ReadValue<Vector2>());
-            m_OnLookCanceled = ctx => LookRotation(ctx.ReadValue<Vector2>());
+            m_OnLookPerformed = ctx => shouldRotate = true;
+            m_OnLookCanceled = ctx => shouldRotate = false;
         }
 
         private void ConnectEvents()
@@ -64,13 +66,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             DisconnectEvents();
         }
 
+        public void Update()
+        {
+            if (m_PlayerControls == null || !shouldRotate)
+                return;
+
+            LookRotation(m_PlayerControls.Player.Look.ReadValue<Vector2>());
+        }
 
         public void LookRotation(Vector2 lookDelta)
         {
-            lookDelta *= sensitivity;
-
-            float yRot = lookDelta.x;
-            float xRot = lookDelta.y;
+            yRot = lookDelta.x;
+            xRot = lookDelta.y;
 
             m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
