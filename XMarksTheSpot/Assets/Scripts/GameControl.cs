@@ -10,13 +10,40 @@ public class GameControl : MonoBehaviour
     public RectTransform finishPanel;
 
     public TMPro.TextMeshProUGUI finishText;
+    public TMPro.TextMeshProUGUI exitText;
     public TMPro.TextMeshProUGUI scoreText;
     public Image hudDisplay;
     private bool completedGame = false;
     PlayerControls controls;
 
+    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    {
+        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"xbox-start\">" },
+        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"playstation-start\">" },
+        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"xbox-start\">" },
+    };
+
+    private string GetRelevantHintSprite()
+    {
+        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
+            return "<sprite name=\"keyboard-E\">";
+        
+
+        if (gamepadToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+                return hint;
+
+        return "Unknown";
+    }
+
+    private void updateExitText()
+    {
+        string hint = GetRelevantHintSprite();
+        exitText.text = $"Press {hint} to return to Main Menu";
+    }
+
     public void goToMainMenu()
     {
+        ActiveDeviceManager.onDeviceChangedStatic -= updateExitText;
         Debug.Log("Going to main menu");
         SceneSwitcher.loadScene("mainMenu");
     }
@@ -46,5 +73,7 @@ public class GameControl : MonoBehaviour
         PlayerController.mainController.getPlayer().SetActive(false);
         TextHintHandler.cancelHint();
         controls.Enable();
+        ActiveDeviceManager.onDeviceChangedStatic += updateExitText;
+        updateExitText();
     }
 }
