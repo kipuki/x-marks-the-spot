@@ -13,7 +13,6 @@ public class DigTreasure : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // startPos = transform.localPosition;
         deltaVector = targetVector - transform.localPosition;
     }
 
@@ -30,7 +29,7 @@ public class DigTreasure : MonoBehaviour
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetVector, deltaVector.magnitude/digGoal);
         if (transform.localPosition.Equals(targetVector))
         {
-            GetComponentInParent<InteractTrigger>().disableAfterUse = true;
+            GetComponentInParent<ProximityPrompt>().disableAfterUse = true;
             GetComponentInChildren<CapsuleCollider>().enabled = true;
             TextHintHandler.showHint(new TextHint("At last I have found the treasure! Lets open it.",2,5));
         }

@@ -29,9 +29,6 @@ public class BoatControl : MonoBehaviour
         if (moveBoat)
         {
             if (!transform.position.Equals(destination)) {
-                // transform.position += -transform.right * 10f * Time.deltaTime;
-                // moveBoat = false;
-
                 transform.position = Vector3.MoveTowards(transform.position, destination, 10f * Time.deltaTime);
             }
             else {
@@ -39,8 +36,7 @@ public class BoatControl : MonoBehaviour
                 playerCamera.enabled = true;
                 boatCamera.enabled = false;
                 GameObject player = playerCamera.transform.parent.gameObject;
-                // playerCamera.gameObject.transform.parent.transform.position = boatCamera.gameObject.transform.position;
-                player.SendMessage("setSpawn", boatCamera.gameObject.transform.position);
+                player.SendMessage("setSpawnPosition", boatCamera.gameObject.transform.position);
                 player.SendMessage("respawn");
                 this.enabled = false;
             }
@@ -49,9 +45,6 @@ public class BoatControl : MonoBehaviour
 
     private void startMoving()
     {
-        // yield return new WaitForSeconds(1.5f);
-        // transform.rotation = Quaternion.FromToRotation(transform.position, destination);
-        // Quaternion.LookRotation()
         gameObject.name = "usedBoat";
         moveBoat = true;
     }
@@ -64,7 +57,7 @@ public class BoatControl : MonoBehaviour
         playerCamera.enabled = false;
         playerObject.SendMessage("disableCharacter");
         TextHintHandler.showHint(new TextHint("The key worked! Onto the other island.", 2));
-        // StartCoroutine("startMoving");
+
         // To disable the trigger.
         gameObject.GetComponent<BoxCollider>().enabled = false;
         Invoke("startMoving", 1.5f);
@@ -77,7 +70,7 @@ public class BoatControl : MonoBehaviour
             if (PlayerController.hasBoatKey)
             {
                 playerObject = col.gameObject;
-                (gameObject.GetComponent("InteractTrigger") as MonoBehaviour).enabled = true;
+                (gameObject.GetComponent("ProximityPrompt") as MonoBehaviour).enabled = true;
             } else
                 TextHintHandler.showHint(new TextHint("I need a key to start the engine.", 1, 7));
         }

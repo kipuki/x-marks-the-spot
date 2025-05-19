@@ -21,19 +21,6 @@ public class TextHintHandler : MonoBehaviour {
         textDisplay = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         mainTextHintHandler = this;
 	}
-	
-	void Update () {
-        // As taught in lectures, best to use coroutine! :)
-        // if (gameObject.GetComponent<Text>().enabled)
-        // {
-        //     timer += Time.deltaTime;
-        //     if(timer >= 4)
-        //     {
-        //         gameObject.GetComponent<Text>().enabled = false;
-        //         timer = 0.0f;
-        //     }
-        // }
-	}
 
     public void setHint(string message)
     {
@@ -89,9 +76,16 @@ public class TextHintHandler : MonoBehaviour {
         currentHint = hintData;
         textDisplay.text = hintData.getMessage();
         textDisplay.enabled = true;
-        yield return new WaitForSeconds(hintData.getDuration());
-        textDisplay.enabled = false;
-        cancelCoroutine();
+
+        float? duration = hintData.getDuration();
+        if (duration != null)
+        {
+            yield return new WaitForSeconds(duration.Value);
+            textDisplay.enabled = false;
+            cancelCoroutine();
+        }
+        
+        yield return null;
     }
 }
 
@@ -99,10 +93,10 @@ public class TextHintHandler : MonoBehaviour {
 public class TextHint {
         private string message;
         private int priority;
-        private float duration;
+        private float? duration;
 
 
-        public TextHint(string message, int priority, float duration)
+        public TextHint(string message, int priority, float? duration)
         {
             this.message = message;
             this.priority = priority;
@@ -123,7 +117,7 @@ public class TextHint {
             return priority;
         }
 
-        public float getDuration()
+        public float? getDuration()
         {
             return duration;
         }

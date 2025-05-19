@@ -60,14 +60,6 @@ public class FlameTrapController : MonoBehaviour
         }
     }
 
-    // void OnTriggerEnter(Collider col)
-    // {
-    //     if (col.gameObject.tag == "Player")
-    //     {
-    //         PlayerController.damagePlayer(damage);
-    //     }
-    // }
-
     void OnTriggerStay(Collider col)
     {
         if (col.gameObject.tag == "Player")

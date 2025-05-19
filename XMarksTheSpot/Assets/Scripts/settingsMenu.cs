@@ -1,9 +1,10 @@
+using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class settingsMenu : MonoBehaviour
+public class SettingsMenu : MonoBehaviour
 {
     private float masterVolume = 1f;
     private float musicVolume = 1f;
@@ -18,17 +19,10 @@ public class settingsMenu : MonoBehaviour
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
 
-    // void onEnable()
-    // {
-    //     loadSavedData();
-    //     updateDisplay();
-    //     Debug.Log("Loaded settings");
-    // }
-
-    // void onDisable()
-    // {
-    //     saveButton.gameObject.SetActive(false);
-    // }
+    [Header("Default Colors")]
+    public ColorBlock defaultButtonColor;
+    [Header("Pressed Colors")]
+    public ColorBlock pressedButtonColor;
 
     public void loadSavedData()
     {
@@ -54,6 +48,10 @@ public class settingsMenu : MonoBehaviour
         difficultyValues.Add("Normal", 1.0f);
         difficultyValues.Add("Hard", 1.5f);
         loadSavedData();
+    }
+
+    void Start()
+    {
         updateDisplay();
     }
 
@@ -86,7 +84,10 @@ public class settingsMenu : MonoBehaviour
     private void updateDifficultyButtons()
     {
         foreach (Button button in difficultyButtons.GetComponentsInChildren<Button>())
-            button.interactable = (difficultyMultiplier != difficultyValues.GetValueOrDefault(button.name));
+        {
+            bool pressed = (difficultyMultiplier == difficultyValues.GetValueOrDefault(button.name));
+            button.colors = pressed ? pressedButtonColor : defaultButtonColor;
+        }
     }
 
     public void saveSettings()

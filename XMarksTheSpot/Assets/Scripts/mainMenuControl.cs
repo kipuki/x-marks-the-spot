@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-public class mainMenuControl : MonoBehaviour
+public class MainMenuControl : MonoBehaviour
 {
 
     public string gameSceneName = "gameScene";
