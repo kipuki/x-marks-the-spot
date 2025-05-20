@@ -36,6 +36,8 @@ public class TerrainTreeToPrefabConverter : EditorWindow
         Transform parent = new GameObject("ConvertedTrees").transform;
         parent.position = terrain.transform.position;
 
+        Undo.RegisterCompleteObjectUndo(terrainData, "Convert Terrain Trees to Prefabs");
+
         for (int i = 0; i < instances.Length; i++)
         {
             TreeInstance instance = instances[i];
@@ -52,7 +54,9 @@ public class TerrainTreeToPrefabConverter : EditorWindow
             Quaternion rotation = Quaternion.Euler(0, instance.rotation * Mathf.Rad2Deg, 0);
             Vector3 scale = new Vector3(instance.widthScale, instance.heightScale, instance.widthScale);
 
-            GameObject treeGO = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
+            GameObject treeGO = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+            Undo.RegisterCreatedObjectUndo(treeGO, "Convert Terrain Tree");
+            
             treeGO.transform.SetPositionAndRotation(position, rotation);
             treeGO.transform.localScale = scale;
             treeGO.transform.SetParent(parent);
