@@ -89,6 +89,12 @@ Much thanks to the talented creators who's assets are featured in this project. 
 
   *Creator:* Fubu Studios
 
+* **Tunnel Lava**
+
+  [Free Lava Shader](https://assetstore.unity.com/packages/vfx/shaders/free-lava-shader-292492)
+
+  *Creator:* AYproduct
+
 ### Audio
 
 * **Cannon Sounds**
