@@ -172,7 +172,7 @@ public class CanonControl : MonoBehaviour
         // Enable character controller.
         occupyingPlayer.transform.parent = null;
         occupyingPlayer.enableCharacter();
-        occupyingPlayer.SendMessage("setSpawn", checkpointSpawnPosition);
+        occupyingPlayer.SendMessage("setSpawnPosition", checkpointSpawnPosition);
         occupyingPlayer = null;
     }
 
