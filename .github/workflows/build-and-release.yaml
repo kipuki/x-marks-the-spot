@@ -6,7 +6,13 @@ on:
       - main
     tags:
       - '*'
+    paths-ignore:
+      - '**/*.md'
+  
   pull_request:
+    paths-ignore:
+      - '**/*.md'
+
 
 env:
   UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
