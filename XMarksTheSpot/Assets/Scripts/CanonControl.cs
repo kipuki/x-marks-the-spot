@@ -37,27 +37,27 @@ public class CanonControl : MonoBehaviour
 
     private Vector2 rotationInput;
 
-    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadRotateToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    private Dictionary<ControlSchemeManager.ControlScheme, string> controlRotateToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
-        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"playstation-left-stick\"> <sprite name=\"playstation-dpad\">" },
-        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-wasd\"> <sprite name=\"keyboard-arrow-keys\">" },
+        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"playstation-left-stick\"> <sprite name=\"playstation-dpad\">" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
     };
 
-    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadFireToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    private Dictionary<ControlSchemeManager.ControlScheme, string> controlFireToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"gamepad-a-colored\">" },
-        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"gamepad-cross-colored\">" },
-        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"gamepad-b-colored\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-Space\">" },
+        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"gamepad-a-colored\">" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"gamepad-cross-colored\">" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"gamepad-b-colored\">" },
     };
 
     private string GetRotateHintSprite()
     {
-        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
-            return "<sprite name=\"keyboard-wasd\"> <sprite name=\"keyboard-arrow-keys\">";
-
-
-        if (gamepadRotateToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+        if (controlRotateToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
             return hint;
 
         return "Unknown";
@@ -65,11 +65,7 @@ public class CanonControl : MonoBehaviour
 
     private string GetFireHintSprite()
     {
-        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
-            return "<sprite name=\"keyboard-Space\">";
-
-
-        if (gamepadFireToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+        if (controlFireToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
             return hint;
 
         return "Unknown";
@@ -152,7 +148,7 @@ public class CanonControl : MonoBehaviour
 
     public void exitCannon()
     {
-        ActiveDeviceManager.onDeviceChangedStatic -= showInstructionText;
+        ControlSchemeManager.onControlSchemeChanged -= showInstructionText;
         TextHintHandler.showHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
         StartCoroutine(exitCannon(6));
     }
@@ -202,7 +198,7 @@ public class CanonControl : MonoBehaviour
         crosshair.enabled = true;
         occupyingPlayer.transform.parent = gameObject.transform;
 
-        ActiveDeviceManager.onDeviceChangedStatic += showInstructionText;
+        ControlSchemeManager.onControlSchemeChanged += showInstructionText;
         showInstructionText();
     }
 

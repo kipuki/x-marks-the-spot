@@ -16710,7 +16710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ae30231b9516c4f90be3109830db3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDeviceChangedEvent:
+  onControlChangedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2124555875 stripped
