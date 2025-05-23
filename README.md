@@ -55,7 +55,7 @@ https://github.com/user-attachments/assets/fa10cadd-ae9e-4d43-9b2d-b75dc0b1fc83
 Alternatively, the trailer is also available on [YouTube](https://www.youtube.com/watch?v=Gw-_fH8bKYc).
 
 ## Challenges & Learnings
-The biggest challenge I faced during this project was manually altering the heightmap-based terrain. After sculpting the landscape, I realized that I made it very low. This was a problem since I palnned on adding multiple islands. The issue was rectified through manual modification of the heightmap. 
+The biggest challenge I faced during this project was manually altering the heightmap-based terrain. After sculpting the landscape, I realized that I made it very low. This was a problem since I planned on adding multiple islands. The issue was rectified through manual modification of the heightmap. 
 
 ## Credits
 The industry is full of talented individuals and it is important to credit them properly. Credits to used assets can be found [here](/CREDITS.md).
