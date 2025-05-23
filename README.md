@@ -16,6 +16,7 @@ Developed using **Unity 6.1 (6000.1.3f1)** and **C# 9.0**. Key milestones includ
 - Designed multi-environment levels including mountainous terrain and trap-filled tunnels.
 - Optimized performance using occlusion culling, Level of Detail (LOD), and projectile lifecycle animations.
 - Implemented full controller support featuring context-sensitive input glyphs and event-driven input handling.
+- Settings panel including difficulty settings.
 - Created tools for asset and terrain tree management.
 - Automated build pipelines with GitHub Actions.
 

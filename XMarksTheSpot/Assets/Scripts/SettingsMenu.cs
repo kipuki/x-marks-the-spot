@@ -11,7 +11,11 @@ public class SettingsMenu : MonoBehaviour
     private float sfxVolume = 1f;
     private float difficultyMultiplier = 1f;
 
-    private Dictionary<string, float> difficultyValues = new Dictionary<string, float>();
+    private Dictionary<string, float> difficultyValues = new Dictionary<string, float>() {
+        { "Easy", 0.5f },
+        { "Normal", 1.0f },
+        { "Hard", 1.5f }
+    };
 
     public Button saveButton;
     public HorizontalLayoutGroup difficultyButtons;
@@ -30,7 +34,6 @@ public class SettingsMenu : MonoBehaviour
         masterVolume = UserSettings.getMasterVolume();
         musicVolume = UserSettings.getMusicVolume();
         sfxVolume = UserSettings.getSFXVolume();
-        updateDisplay();
         saveButton.gameObject.SetActive(false);
     }
 
@@ -44,9 +47,6 @@ public class SettingsMenu : MonoBehaviour
 
     void Awake()
     {
-        difficultyValues.Add("Easy", 0.5f);
-        difficultyValues.Add("Normal", 1.0f);
-        difficultyValues.Add("Hard", 1.5f);
         loadSavedData();
     }
 
@@ -73,11 +73,10 @@ public class SettingsMenu : MonoBehaviour
         saveButton.gameObject.SetActive(true);
     }
 
-    public void setDifficultyMultiplier(Button difficultyButton)
+    public void setDifficultyMultiplier(float newDifficultyMultiplier)
     {
-        this.difficultyMultiplier = difficultyValues.GetValueOrDefault(difficultyButton.name);
+        difficultyMultiplier = newDifficultyMultiplier;
         updateDifficultyButtons();
-        Debug.Log("Changed difficulty to "+difficultyButton.name);
         saveButton.gameObject.SetActive(true);
     }
     
