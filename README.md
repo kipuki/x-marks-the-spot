@@ -44,6 +44,7 @@ This project provided valuable experience in game development and tools programm
 - Proficiency with Unity’s input system and event-based input architecture.
 - In-depth knowledge of performance optimization strategies in Unity.
 - Strong gameplay systems design and interactive environment creation.
+- Abstraction of communication and behavior between GameObjects using Unity Events.
 - Tools programming and workflow automation experience.
 - Solving complex input device challenges, including simultaneous controller inputs and seamless device switching.
 - Shader and material customization for improved visual quality.
