@@ -95,6 +95,12 @@ Much thanks to the talented creators who's assets are featured in this project. 
 
   *Creator:* AYproduct
 
+* **Spiderweb Texture**
+
+  [Yughues Free Fabric Materials](https://assetstore.unity.com/packages/2d/textures-materials/fabric/yughues-free-fabric-materials-13002)
+
+  *Creator:* Nobiax / Yughues
+
 ### Audio
 
 * **Cannon Sounds**

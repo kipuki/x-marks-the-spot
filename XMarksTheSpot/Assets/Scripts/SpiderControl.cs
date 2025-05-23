@@ -8,6 +8,7 @@ public class SpiderControl : MonoBehaviour
     private bool canFire = true;
     public float webSpeed = 10;
     public float webSize = 1;
+    public Vector3 webAngularVelocity = new Vector3(0f, 0f, 0f);
 
     public float webCooldown = 3;
     public int webDamage = 20;
@@ -73,6 +74,10 @@ public class SpiderControl : MonoBehaviour
         web.transform.LookAt(targetTransform.position);
         web.name = "web";
         web.linearVelocity = web.transform.forward  * webSpeed * UserSettings.getDifficultyMultiplier();
+        web.angularVelocity = webAngularVelocity;
+        TrailRenderer trail = web.GetComponent<TrailRenderer>();
+        trail.widthMultiplier = web.transform.localScale.magnitude / 2;
+        trail.time = webSize;
         // Setting damage at the end as last priority
         web.GetComponent<SpiderWeb>().damage = webDamage;
         web.GetComponent<SpiderWeb>().speedDebuff = speedDebuff;

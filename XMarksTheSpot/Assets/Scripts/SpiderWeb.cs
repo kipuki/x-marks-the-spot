@@ -6,17 +6,6 @@ public class SpiderWeb : MonoBehaviour
 {
     public int damage = 20;
     public float speedDebuff = 3;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // GetComponent<Rigidbody>().velocity += transform.forward;
-    }
 
     void OnTriggerEnter(Collider col)
     {

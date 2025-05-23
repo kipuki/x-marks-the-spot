@@ -1949,6 +1949,14 @@ PrefabInstance:
       propertyPath: webCooldown
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3529736701632590852, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.003
@@ -7082,7 +7090,7 @@ PrefabInstance:
       objectReference: {fileID: 1994717225}
     - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: webSize
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: webSpeed
@@ -7095,6 +7103,14 @@ PrefabInstance:
     - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: layerMask.m_Bits
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4837745672094500657, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: m_RootOrder
@@ -9207,7 +9223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1092381392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13036,8 +13052,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: attackRange
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529736701203642772, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
+      propertyPath: webAngularVelocity.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3529736701632590852, guid: 665105480dc5a70da9a5dc788cd39dd5, type: 3}
       propertyPath: m_LocalPosition.x
