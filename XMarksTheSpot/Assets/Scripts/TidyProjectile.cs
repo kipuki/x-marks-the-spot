@@ -26,12 +26,6 @@ public class TidyProjectile : MonoBehaviour, TouchesWater
         Destroy(gameObject, maximumLifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void checkDespawnConditions()
     {
         // Debug.Log("Invisible: "+ invisible);

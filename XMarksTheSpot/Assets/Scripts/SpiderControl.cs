@@ -15,7 +15,8 @@ public class SpiderControl : MonoBehaviour
     public bool rotates = true;
     public Vector3 rotationOffset;
     public float attackRange = 30f;
-    private Transform playerTransform;
+    private Transform targetTransform;
+    public GameObject target;
     private Animation spiderAnimation;
 
     public Transform launcher;
@@ -24,36 +25,44 @@ public class SpiderControl : MonoBehaviour
     void Start()
     {
         spiderAnimation = gameObject.GetComponent<Animation>();
-        // spiderAnimation.Play("Idle");
-        playerTransform = PlayerController.mainController.getPlayer().transform;
+        targetTransform = target.transform;
+    }
+
+    public void SetTarget(GameObject newTarget)
+    {
+        target = newTarget;
+        targetTransform = target.transform;
+    }
+
+    public void FireAtTargetIfPossible()
+    {
+        if (Vector3.Distance(transform.position, targetTransform.position) > attackRange)
+            return;
+
+        if (!canFire)
+            return;
+
+        if (!spiderAnimation.isPlaying)
+            spiderAnimation.Play("Idle");
+
+        if (rotates)
+        {
+            transform.LookAt(new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z));
+            transform.Rotate(rotationOffset);
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(launcher.position, (targetTransform.position - launcher.position).normalized, out hit, attackRange) && (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject == target))
+            StartCoroutine("FireWeb");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, playerTransform.position) < attackRange) {
-            // transform.rotation = Quaternion.RotateTowards();
-            if (!spiderAnimation.isPlaying)
-                spiderAnimation.Play("Idle");
-            if (rotates)
-            {
-                transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
-                transform.Rotate(rotationOffset);
-            }
-            // // transform.localRotation
-            
-            if (canFire)
-            {
-                // Raycast to make sure the spider can hit the player.
-                RaycastHit hit;
-                if (Physics.Raycast (launcher.position, (playerTransform.position - launcher.position ).normalized, out hit, attackRange) && hit.collider.gameObject.tag == "Player")
-                    StartCoroutine("fireWeb");
-        
-            }
-        }
+        FireAtTargetIfPossible();
     }
 
-    IEnumerator fireWeb()
+    IEnumerator FireWeb()
     {
         canFire = false;
         spiderAnimation.Stop();
@@ -61,7 +70,7 @@ public class SpiderControl : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         Rigidbody web = Instantiate(webPrefab, launcher.position, transform.rotation) as Rigidbody;
         web.transform.localScale *= webSize;
-        web.transform.LookAt(playerTransform.position);
+        web.transform.LookAt(targetTransform.position);
         web.name = "web";
         web.linearVelocity = web.transform.forward  * webSpeed * UserSettings.getDifficultyMultiplier();
         // Setting damage at the end as last priority
