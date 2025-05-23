@@ -141,6 +141,11 @@ public class CanonControl : MonoBehaviour
         }
     }
 
+    public void setRotationSpeed(int newRotationSpeed)
+    {
+        rotationSpeed = newRotationSpeed;
+    }
+
     public void exitCannon()
     {
         ControlSchemeManager.onControlSchemeChanged -= showInstructionText;
