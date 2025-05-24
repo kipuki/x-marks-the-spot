@@ -16,20 +16,18 @@ public class GameControl : MonoBehaviour
     private bool completedGame = false;
     PlayerControls controls;
 
-    private Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    private Dictionary<ControlSchemeManager.ControlScheme, string> gamepadToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"xbox-start\">" },
-        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"playstation-start\">" },
-        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"xbox-start\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-E\">" },
+        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"xbox-start\">" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"playstation-start\">" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"xbox-start\">" },
     };
 
     private string GetRelevantHintSprite()
     {
-        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
-            return "<sprite name=\"keyboard-E\">";
-        
-
-        if (gamepadToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
                 return hint;
 
         return "Unknown";
@@ -43,7 +41,7 @@ public class GameControl : MonoBehaviour
 
     public void goToMainMenu()
     {
-        ActiveDeviceManager.onDeviceChangedStatic -= updateExitText;
+        ControlSchemeManager.onControlSchemeChanged -= updateExitText;
         Debug.Log("Going to main menu");
         SceneSwitcher.loadScene("mainMenu");
     }
@@ -73,7 +71,7 @@ public class GameControl : MonoBehaviour
         PlayerController.mainController.getPlayer().SetActive(false);
         TextHintHandler.cancelHint();
         controls.Enable();
-        ActiveDeviceManager.onDeviceChangedStatic += updateExitText;
+        ControlSchemeManager.onControlSchemeChanged += updateExitText;
         updateExitText();
     }
 }

@@ -20,24 +20,27 @@ public class BreakableWall : MonoBehaviour
         
     }
 
+    public void BreakWall()
+    {
+        gameObject.name = "brokenWall";
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+
+        Rigidbody[] children = transform.GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody child in children)
+        {
+            child.transform.parent = transform.parent;
+            child.gameObject.GetComponent<BoxCollider>().enabled = true;
+            child.isKinematic = false;
+            child.GetComponent<TidyObject>().enabled = true;
+        }
+        onWallBreak.Invoke();
+        gameObject.GetComponent<AudioSource>().Play();
+    }
+
     void OnCollisionEnter(Collision theObject) 
     {
         if (theObject.gameObject.name == "cannonball")
-        {
-            gameObject.name = "brokenWall";
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            gameObject.GetComponent<BoxCollider>().enabled = false;
-
-            Rigidbody[] children = transform.GetComponentsInChildren<Rigidbody>();
-            foreach(Rigidbody child in children)
-            {
-                child.transform.parent = transform.parent;
-                child.gameObject.GetComponent<BoxCollider>().enabled = true;
-                child.isKinematic = false;
-                child.GetComponent<TidyObject>().enabled = true;
-            }
-            onWallBreak.Invoke();
-            gameObject.GetComponent<AudioSource>().Play();
-        }
+            BreakWall();
     }
 }

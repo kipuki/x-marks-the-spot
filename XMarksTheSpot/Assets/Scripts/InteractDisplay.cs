@@ -7,20 +7,18 @@ public class InteractDisplay : MonoBehaviour
     private static TMPro.TextMeshProUGUI textDisplay;
     private static string currentAction = "";
 
-    private static Dictionary<ActiveDeviceManager.GamepadLayout, string> gamepadToButtonHint = new Dictionary<ActiveDeviceManager.GamepadLayout, string>()
+    private static Dictionary<ControlSchemeManager.ControlScheme, string> gamepadToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ActiveDeviceManager.GamepadLayout.Xbox, "<sprite name=\"gamepad-x-colored\">" },
-        { ActiveDeviceManager.GamepadLayout.PlayStation, "<sprite name=\"gamepad-square-colored\">" },
-        { ActiveDeviceManager.GamepadLayout.NintendoSwitch, "<sprite name=\"gamepad-y-colored\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-E\">" },
+        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"gamepad-x-colored\">" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"gamepad-square-colored\">" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"gamepad-y-colored\">" },
     };
 
     private static string GetRelevantHintSprite()
     {
-        if (ActiveDeviceManager.currentControlScheme == ActiveDeviceManager.DeviceType.Keyboard)
-            return "<sprite name=\"keyboard-E\">";
-        
-
-        if (gamepadToButtonHint.TryGetValue(ActiveDeviceManager.currentGamepadLayout, out string hint))
+        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
                 return hint;
 
         return "Unknown";
@@ -34,7 +32,7 @@ public class InteractDisplay : MonoBehaviour
     public static void disableInteract()
     {
         textDisplay.enabled = false;
-        ActiveDeviceManager.onDeviceChangedStatic -= updateText;
+        ControlSchemeManager.onControlSchemeChanged -= updateText;
     }
 
     private static void updateText()
@@ -48,7 +46,7 @@ public class InteractDisplay : MonoBehaviour
         currentAction = action;
         updateText();
         textDisplay.enabled = true;
-        ActiveDeviceManager.onDeviceChangedStatic += updateText;
+        ControlSchemeManager.onControlSchemeChanged += updateText;
     }
 
 }
