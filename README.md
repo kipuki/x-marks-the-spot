@@ -20,6 +20,9 @@ Developed using **Unity 6.1 (6000.1.3f1)** and **C# 9.0**. Key milestones includ
 - Created tools for asset and terrain tree management.
 - Automated build pipelines with GitHub Actions.
 
+## Connected Projects
+This project made use of [Sprite Sheet Tools](https://github.com/yousefalshaikh17/sprite-sheet-tools), a project I made to split and generate sprite sheets. This was very useful for preparing the input glyph sprite sheet for use in Unity's TextMeshPro.
+
 ## Installation
 
 There are two approaches to installation. Downloading the build or downloading the source.
