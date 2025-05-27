@@ -18,17 +18,17 @@ public class GameControl : MonoBehaviour
 
     private Dictionary<ControlSchemeManager.ControlScheme, string> gamepadToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
-        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-E\">" },
-        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"xbox-start\">" },
-        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"playstation-start\">" },
-        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"xbox-start\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "unknown" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "keyboard-ESC" },
+        { ControlSchemeManager.ControlScheme.Xbox, "xbox-start" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "playstation-start" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "xbox-start" },
     };
 
     private string GetRelevantHintSprite()
     {
-        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
-                return hint;
+        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string spriteName))
+                return $"<sprite name=\"{spriteName}\">";
 
         return "Unknown";
     }

@@ -37,28 +37,32 @@ public class CanonControl : MonoBehaviour
 
     private Vector2 rotationInput;
 
-    private Dictionary<ControlSchemeManager.ControlScheme, string> controlRotateToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
+    private Dictionary<ControlSchemeManager.ControlScheme, (string, string)> controlRotateToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, (string, string)>()
     {
-        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
-        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-wasd\"> <sprite name=\"keyboard-arrow-keys\">" },
-        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
-        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"playstation-left-stick\"> <sprite name=\"playstation-dpad\">" },
-        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"xbox-left-stick\"> <sprite name=\"xbox-dpad\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, ("unknown", "unknown") },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, ("keyboard-wasd", "keyboard-arrow-keys") },
+        { ControlSchemeManager.ControlScheme.Xbox, ("xbox-left-stick", "xbox-dpad") },
+        { ControlSchemeManager.ControlScheme.PlayStation, ("playstation-left-stick", "playstation-dpad") },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, ("xbox-left-stick", "xbox-dpad") },
     };
+
 
     private Dictionary<ControlSchemeManager.ControlScheme, string> controlFireToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
-        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-Space\">" },
-        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"gamepad-a-colored\">" },
-        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"gamepad-cross-colored\">" },
-        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"gamepad-b-colored\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "unknown" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "keyboard-Space" },
+        { ControlSchemeManager.ControlScheme.Xbox, "gamepad-a-colored" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "gamepad-cross-colored" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "gamepad-b-colored" },
     };
 
     private string GetRotateHintSprite()
     {
-        if (controlRotateToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
-            return hint;
+        if (controlRotateToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out (string spriteName1, string spriteName2) hintTuple))
+        {
+            (string spriteName1, string spriteName2) = hintTuple;
+            return $"<sprite name=\"{spriteName1}\"> <sprite name=\"{spriteName2}\">";
+        }
 
         return "Unknown";
     }
@@ -66,7 +70,7 @@ public class CanonControl : MonoBehaviour
     private string GetFireHintSprite()
     {
         if (controlFireToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
-            return hint;
+            return $"<sprite name=\"{hint}\">";
 
         return "Unknown";
     }
