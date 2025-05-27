@@ -154,6 +154,8 @@ public class CanonControl : MonoBehaviour
     {
         ControlSchemeManager.onControlSchemeChanged -= showInstructionText;
         TextHintHandler.showHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
+        StopAllCoroutines();
+        canFire = false;
         StartCoroutine(exitCannon(6));
     }
 
