@@ -9,17 +9,18 @@ public class InteractDisplay : MonoBehaviour
 
     private static Dictionary<ControlSchemeManager.ControlScheme, string> gamepadToButtonHint = new Dictionary<ControlSchemeManager.ControlScheme, string>()
     {
-        { ControlSchemeManager.ControlScheme.Unknown, "<sprite name=\"unknown\">" },
-        { ControlSchemeManager.ControlScheme.KeyboardMouse, "<sprite name=\"keyboard-E\">" },
-        { ControlSchemeManager.ControlScheme.Xbox, "<sprite name=\"gamepad-x-colored\">" },
-        { ControlSchemeManager.ControlScheme.PlayStation, "<sprite name=\"gamepad-square-colored\">" },
-        { ControlSchemeManager.ControlScheme.NintendoSwitch, "<sprite name=\"gamepad-y-colored\">" },
+        { ControlSchemeManager.ControlScheme.Unknown, "unknown" },
+        { ControlSchemeManager.ControlScheme.KeyboardMouse, "keyboard-E" },
+        { ControlSchemeManager.ControlScheme.Xbox, "gamepad-x-colored" },
+        { ControlSchemeManager.ControlScheme.PlayStation, "gamepad-square-colored" },
+        { ControlSchemeManager.ControlScheme.NintendoSwitch, "gamepad-y-colored" },
     };
+
 
     private static string GetRelevantHintSprite()
     {
-        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string hint))
-                return hint;
+        if (gamepadToButtonHint.TryGetValue(ControlSchemeManager.currentControlScheme, out string spriteName))
+            return $"<sprite name=\"{spriteName}\">";
 
         return "Unknown";
     }
