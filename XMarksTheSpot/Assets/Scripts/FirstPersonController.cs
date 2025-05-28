@@ -1,3 +1,8 @@
+/*
+    This script is an enhanced recreation of the FirstPersonController Standard Asset from 2021.3.5f.
+    This version allows it to work best with XMarksTheSpot and follow the new Unity Input System
+*/
+
 using System;
 using UnityEngine;
 using UnityStandardAssets.Utility;
@@ -46,7 +51,7 @@ public class FirstPersonController : MonoBehaviour
     private Vector3 slopeSlideVelocity;
     private bool isSliding;
 
-    private PlayerControls controls;
+    private PlayerControls m_controls;
 
     // Use this for initialization
     private void Start()
@@ -64,28 +69,28 @@ public class FirstPersonController : MonoBehaviour
 
     private void Awake()
     {
-        controls = new PlayerControls();
-        controls.Player.Move.performed += ctx => m_Input = ctx.ReadValue<Vector2>();
-        controls.Player.Move.canceled += ctx => m_Input = Vector2.zero;
+        m_controls = new PlayerControls();
+        m_controls.Player.Move.performed += ctx => m_Input = ctx.ReadValue<Vector2>();
+        m_controls.Player.Move.canceled += ctx => m_Input = Vector2.zero;
 
-        controls.Player.Jump.performed += ctx => m_Jump = true;
-        controls.Player.Jump.canceled += ctx => m_Jump = false;
+        m_controls.Player.Jump.performed += ctx => m_Jump = true;
+        m_controls.Player.Jump.canceled += ctx => m_Jump = false;
         
-        controls.Player.Sprint.performed += ctx => m_Sprinting = !m_Sprinting;
+        m_controls.Player.Sprint.performed += ctx => m_Sprinting = !m_Sprinting;
 
         m_Camera = Camera.main;
-        m_PlayerLook.Init(controls, transform, m_Camera.transform);
+        m_PlayerLook.Init(m_controls, transform, m_Camera.transform);
     }
 
     private void OnEnable()
     {
-        controls.Player.Enable();
+        m_controls.Player.Enable();
         m_PlayerLook.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Player.Disable();
+        m_controls.Player.Disable();
         m_PlayerLook.Disable();
     }
 

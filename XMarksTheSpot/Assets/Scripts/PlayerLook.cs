@@ -1,3 +1,8 @@
+/*
+    This script is an enhanced recreation of the PlayerLook Standard Asset from 2021.3.5f.
+    This version allows it to work best with XMarksTheSpot and follow the new Unity Input System
+*/
+
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,11 +11,13 @@ using UnityEngine.InputSystem;
 public class PlayerLook
 {
     public bool clampVerticalRotation = true;
-    public float MinimumX = -90F;
-    public float MaximumX = 90F;
+    public float minimumX = -90F;
+    public float maximumX = 90F;
     public bool smooth;
     public float smoothTime = 5f;
     public bool lockCursor = true;
+    private float yRot = 0;
+    private float xRot = 0;
 
     private Transform m_CharacterTransform;
     private Transform m_CameraTransform;
@@ -18,11 +25,9 @@ public class PlayerLook
     private Quaternion m_CameraTargetRot;
     private PlayerControls m_PlayerControls;
     private bool m_cursorIsLocked = true;
-    private bool shouldRotate = false;
-    private float yRot = 0;
-    private float xRot = 0;
-    private InputAction lookUnlockAction;
-    private InputAction lookLockAction;
+    private bool m_shouldRotate = false;
+    private InputAction m_LookUnlockAction;
+    private InputAction m_LookLockAction;
 
     private System.Action<InputAction.CallbackContext> m_OnLookPerformed;
     private System.Action<InputAction.CallbackContext> m_OnLookCanceled;
@@ -36,11 +41,11 @@ public class PlayerLook
         m_CharacterTargetRot = character.localRotation;
         m_CameraTargetRot = camera.localRotation;
 
-        lookUnlockAction = m_PlayerControls.Player.UnlockCursor;
-        lookLockAction = m_PlayerControls.Player.LockCursor;
+        m_LookUnlockAction = m_PlayerControls.Player.UnlockCursor;
+        m_LookLockAction = m_PlayerControls.Player.LockCursor;
 
-        m_OnLookPerformed = ctx => shouldRotate = true;
-        m_OnLookCanceled = ctx => shouldRotate = false;
+        m_OnLookPerformed = ctx => m_shouldRotate = true;
+        m_OnLookCanceled = ctx => m_shouldRotate = false;
     }
 
     private void ConnectEvents()
@@ -51,8 +56,8 @@ public class PlayerLook
         m_PlayerControls.Player.Look.performed += m_OnLookPerformed;
         m_PlayerControls.Player.Look.canceled += m_OnLookCanceled;
 
-        lookUnlockAction.performed += ctx => m_cursorIsLocked = false;
-        lookLockAction.performed += ctx => m_cursorIsLocked = true;
+        m_LookUnlockAction.performed += ctx => m_cursorIsLocked = false;
+        m_LookLockAction.performed += ctx => m_cursorIsLocked = true;
     }
 
     private void DisconnectEvents()
@@ -60,8 +65,8 @@ public class PlayerLook
         if (m_PlayerControls == null)
             return;
 
-        lookUnlockAction.performed -= ctx => m_cursorIsLocked = false;
-        lookLockAction.performed -= ctx => m_cursorIsLocked = true;
+        m_LookUnlockAction.performed -= ctx => m_cursorIsLocked = false;
+        m_LookLockAction.performed -= ctx => m_cursorIsLocked = true;
 
         m_PlayerControls.Player.Look.performed -= m_OnLookPerformed;
         m_PlayerControls.Player.Look.canceled -= m_OnLookCanceled;
@@ -79,7 +84,7 @@ public class PlayerLook
 
     public void Update()
     {
-        if (m_PlayerControls == null || !shouldRotate)
+        if (m_PlayerControls == null || !m_shouldRotate)
             return;
 
         LookRotation(m_PlayerControls.Player.Look.ReadValue<Vector2>());
@@ -152,7 +157,7 @@ public class PlayerLook
 
         float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan (q.x);
 
-        angleX = Mathf.Clamp (angleX, MinimumX, MaximumX);
+        angleX = Mathf.Clamp (angleX, minimumX, maximumX);
 
         q.x = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleX);
 
