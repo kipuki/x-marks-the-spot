@@ -28,59 +28,59 @@ public class SettingsMenu : MonoBehaviour
     [Header("Pressed Colors")]
     public ColorBlock pressedButtonColor;
 
-    public void loadSavedData()
+    public void LoadSavedData()
     {
-        difficultyMultiplier = UserSettings.getDifficultyMultiplier();
-        masterVolume = UserSettings.getMasterVolume();
-        musicVolume = UserSettings.getMusicVolume();
-        sfxVolume = UserSettings.getSFXVolume();
+        difficultyMultiplier = UserSettings.GetDifficultyMultiplier();
+        masterVolume = UserSettings.GetMasterVolume();
+        musicVolume = UserSettings.GetMusicVolume();
+        sfxVolume = UserSettings.GetSFXVolume();
         saveButton.gameObject.SetActive(false);
     }
 
-    public void updateDisplay()
+    public void UpdateDisplay()
     {
         masterVolumeSlider.value = masterVolume;
         musicVolumeSlider.value = musicVolume;
         sfxVolumeSlider.value = sfxVolume;
-        updateDifficultyButtons();
+        UpdateDifficultyButtons();
     }
 
     void Awake()
     {
-        loadSavedData();
+        LoadSavedData();
     }
 
     void Start()
     {
-        updateDisplay();
+        UpdateDisplay();
     }
 
-    public void setMasterVolume()
+    public void SetMasterVolume()
     {
         masterVolume = masterVolumeSlider.value;
         saveButton.gameObject.SetActive(true);
     }
 
-    public void setMusicVolume()
+    public void SetMusicVolume()
     {
         musicVolume = musicVolumeSlider.value;
         saveButton.gameObject.SetActive(true);
     }
 
-    public void setSFXVolume()
+    public void SetSFXVolume()
     {
         sfxVolume = sfxVolumeSlider.value;
         saveButton.gameObject.SetActive(true);
     }
 
-    public void setDifficultyMultiplier(float newDifficultyMultiplier)
+    public void SetDifficultyMultiplier(float newDifficultyMultiplier)
     {
         difficultyMultiplier = newDifficultyMultiplier;
-        updateDifficultyButtons();
+        UpdateDifficultyButtons();
         saveButton.gameObject.SetActive(true);
     }
     
-    private void updateDifficultyButtons()
+    private void UpdateDifficultyButtons()
     {
         foreach (Button button in difficultyButtons.GetComponentsInChildren<Button>())
         {
@@ -89,12 +89,12 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    public void saveSettings()
+    public void SaveSettings()
     {
-        UserSettings.setDifficultyMultiplier(difficultyMultiplier);
-        UserSettings.setMasterVolume(masterVolume);
-        UserSettings.setMusicVolume(musicVolume);
-        UserSettings.setSFXVolume(sfxVolume);
+        UserSettings.SetDifficultyMultiplier(difficultyMultiplier);
+        UserSettings.SetMasterVolume(masterVolume);
+        UserSettings.SetMusicVolume(musicVolume);
+        UserSettings.SetSFXVolume(sfxVolume);
         saveButton.gameObject.SetActive(false);
     }
 

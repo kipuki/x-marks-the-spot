@@ -203,8 +203,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 448925885}
-        m_TargetAssemblyTypeName: settingsMenu, Assembly-CSharp
-        m_MethodName: saveSettings
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SaveSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -503,11 +503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setMasterVolume
+      value: SetMasterVolume
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: settingsMenu, Assembly-CSharp
+      value: SettingsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -1449,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 448925885}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setDifficultyMultiplier
+      value: SetDifficultyMultiplier
       objectReference: {fileID: 0}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1760,8 +1760,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 448925885}
-        m_TargetAssemblyTypeName: settingsMenu, Assembly-CSharp
-        m_MethodName: loadSavedData
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: LoadSavedData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1772,8 +1772,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1707369125}
-        m_TargetAssemblyTypeName: mainMenuControl, Assembly-CSharp
-        m_MethodName: openPanel
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
+        m_MethodName: OpenPanel
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1019755354}
@@ -2003,11 +2003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setMusicVolume
+      value: SetMusicVolume
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: settingsMenu, Assembly-CSharp
+      value: SettingsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -2097,7 +2097,7 @@ PrefabInstance:
       objectReference: {fileID: 448925885}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setDifficultyMultiplier
+      value: SetDifficultyMultiplier
       objectReference: {fileID: 0}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2715,11 +2715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setSFXVolume
+      value: SetSFXVolume
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: settingsMenu, Assembly-CSharp
+      value: SettingsMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7392441625927586688, guid: 43a65b0e6fdef6a07886f9c73d5cc565, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -2813,7 +2813,11 @@ PrefabInstance:
       objectReference: {fileID: 1707369125}
     - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: quitGame
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuControl, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4195606528935258374, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_Pivot.x
@@ -3418,7 +3422,7 @@ PrefabInstance:
       objectReference: {fileID: 448925885}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setDifficultyMultiplier
+      value: SetDifficultyMultiplier
       objectReference: {fileID: 0}
     - target: {fileID: 1635782159337977552, guid: a3f249d15d41344b48973454a45e4aef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3657,11 +3661,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: openPanel
+      value: OpenPanel
       objectReference: {fileID: 0}
     - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuControl, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -4008,6 +4016,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1707369125}
+    - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4195606528935258369, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuControl, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4195606528935258374, guid: d3b13791b4a7ac7e5a3d6b728fef1dff, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

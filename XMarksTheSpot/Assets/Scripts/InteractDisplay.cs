@@ -30,24 +30,24 @@ public class InteractDisplay : MonoBehaviour
         textDisplay = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
 	}
 
-    public static void disableInteract()
+    public static void DisableInteract()
     {
         textDisplay.enabled = false;
-        ControlSchemeManager.onControlSchemeChanged -= updateText;
+        ControlSchemeManager.onControlSchemeChanged -= UpdateText;
     }
 
-    private static void updateText()
+    private static void UpdateText()
     {
         string hint = GetRelevantHintSprite();
         textDisplay.text = $"Press {hint} to {currentAction}";
     }
 
-    public static void enableInteract(string action)
+    public static void EnableInteract(string action)
     {
         currentAction = action;
-        updateText();
+        UpdateText();
         textDisplay.enabled = true;
-        ControlSchemeManager.onControlSchemeChanged += updateText;
+        ControlSchemeManager.onControlSchemeChanged += UpdateText;
     }
 
 }

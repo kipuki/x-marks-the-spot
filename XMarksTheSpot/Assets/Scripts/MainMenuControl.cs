@@ -15,35 +15,21 @@ public class MainMenuControl : MonoBehaviour
 
     void Awake()
     {
-        UserSettings.setAudioMixer(mixer);
-        // SceneSwitcher.loadScene(gameScene, LoadSceneMode.Additive);
+        UserSettings.SetAudioMixer(mixer);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
-        // SceneManager.GetSceneByName("gameScene");
-
+        SceneSwitcher.LoadScene(gameSceneName);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void startGame()
-    {
-        SceneSwitcher.loadScene(gameSceneName);
-    }
-
-    public void quitGame()
+    public void QuitGame()
     {
         Debug.Log("Game has stopped.");
         Application.Quit();
     }
 
-    public void openPanel(RectTransform panelToOpen)
+    public void OpenPanel(RectTransform panelToOpen)
     {
         foreach (RectTransform panel in panels)
         {

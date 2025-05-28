@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour, TouchesWater
     public Quaternion spawnRotation;
     private MonoBehaviour fpsController;
     private CharacterController charController;
-    // public TMPro.TextMeshProUGUI textHints;
 
     public Slider healthBar;
     public TMPro.TextMeshProUGUI scoreText;
@@ -29,24 +28,24 @@ public class PlayerController : MonoBehaviour, TouchesWater
     public static bool hasBoatKey = false;
     private static bool isDebuffed = false;
 
-    public static void damagePlayer(int damage)
+    public static void DamagePlayer(int damage)
     {
         mainController.HUDon();
         Debug.Log("Took damage: "+ damage);
         health -= damage;
         if (health <= 0)
-            mainController.respawn();
+            mainController.Respawn();
         else
             mainController.healthBar.value = health;
     }
 
-    public static void speedDebuff(float strength, float duration)
+    public static void SpeedDebuff(float strength, float duration)
     {
         if (!isDebuffed)
-            mainController.StartCoroutine(mainController.slowDown(strength, duration));
+            mainController.StartCoroutine(mainController.SlowDown(strength, duration));
     }
 
-    IEnumerator slowDown(float strength, float duration)
+    IEnumerator SlowDown(float strength, float duration)
     {
         isDebuffed = true;
         FirstPersonController fpsController = GetComponent<FirstPersonController>();
@@ -97,37 +96,37 @@ public class PlayerController : MonoBehaviour, TouchesWater
                 case "Boat":
                     // if (!usedBoat)
                     if (hasBoatKey)
-                        TextHintHandler.showHint("I should use the boat to get to the mountain...");
+                        TextHintHandler.ShowHint("I should use the boat to get to the mountain...");
                     else
-                        TextHintHandler.showHint("I should use the boat to get to the mountain... But where did I put the keys?");
+                        TextHintHandler.ShowHint("I should use the boat to get to the mountain... But where did I put the keys?");
                     break;
                 case "backWall":
-                    TextHintHandler.showHint("Seems the entrance is blocked off. Maybe if I use that cannon over there...");
+                    TextHintHandler.ShowHint("Seems the entrance is blocked off. Maybe if I use that cannon over there...");
                     break;
                 case "boatKey":
                     // No need to check if hasBoatKey since the key destroys itself and it wouldnt be possible to get here.
-                    TextHintHandler.showHint("I see a key over there!");
+                    TextHintHandler.ShowHint("I see a key over there!");
                     // TextHintHandler.testHint();
                     break;
                 case "untouchedTreasureSpot":
-                    TextHintHandler.showHint("X marks the spot. The treasure should be under that X!");
+                    TextHintHandler.ShowHint("X marks the spot. The treasure should be under that X!");
                     break;
             }
 
         }
     }
 
-    public Camera getCamera()
+    public Camera GetCamera()
     {
         return transform.GetChild(0).gameObject.GetComponent<Camera>();
     }
 
-    public GameObject getPlayer()
+    public GameObject GetPlayer()
     {
         return gameObject;
     }
 
-    public bool checkIfFacing(GameObject targetObject)
+    public bool CheckIfFacing(GameObject targetObject)
     {
         RaycastHit hit;
 
@@ -136,13 +135,13 @@ public class PlayerController : MonoBehaviour, TouchesWater
         return false;
     }
 
-    void foundKey()
+    void FoundKey()
     {
         hasBoatKey = true;
-        TextHintHandler.showHint("Great! Now I can use my boat.");
+        TextHintHandler.ShowHint("Great! Now I can use my boat.");
     }
 
-    void addPoints(int increment)
+    void AddPoints(int increment)
     {
         HUDon();
         points += increment;
@@ -159,36 +158,36 @@ public class PlayerController : MonoBehaviour, TouchesWater
         }
     }
 
-    public void enableCharacter()
+    public void EnableCharacter()
     {
         charController.enabled = true;
         fpsController.enabled = true;
     }
 
-    public void disableCharacter()
+    public void DisableCharacter()
     {
         fpsController.enabled = false;
         charController.enabled = false;
     }
 
-    void respawn()
+    void Respawn()
     {
-        disableCharacter();
+        DisableCharacter();
         health = 100;
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
         fpsController.enabled = true;
         (fpsController as FirstPersonController).m_MoveDir = Vector2.zero;
-        enableCharacter();
+        EnableCharacter();
         healthBar.value = health;
     }
 
-    void setSpawnPosition(Vector3 newSpawnPosition)
+    void SetSpawnPosition(Vector3 newSpawnPosition)
     {
         spawnPosition = newSpawnPosition;
     }
 
-    void setSpawnRotation(Quaternion newSpawnRotation)
+    void SetSpawnRotation(Quaternion newSpawnRotation)
     {
         spawnRotation = newSpawnRotation;
     }
@@ -197,15 +196,15 @@ public class PlayerController : MonoBehaviour, TouchesWater
     {
         if (hit.gameObject.tag == "Respawn")
         {
+            Respawn();
             Debug.Log("Respawned.");
-            respawn();
-            TextHintHandler.showHint("Lets be more careful this time...");
+            TextHintHandler.ShowHint("Lets be more careful this time...");
         }
     }
 
     public void OnTouchedWater()
     {
-        respawn();
-        TextHintHandler.showHint("Lets not fall in the water again...");
+        Respawn();
+        TextHintHandler.ShowHint("Lets not fall in the water again...");
     }
 }

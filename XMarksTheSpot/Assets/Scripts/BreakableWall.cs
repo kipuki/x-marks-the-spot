@@ -6,20 +6,8 @@ using UnityEngine.Events;
 [RequireComponent (typeof(AudioSource))]
 public class BreakableWall : MonoBehaviour
 {
-
     public UnityEvent onWallBreak;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     public void BreakWall()
     {
         gameObject.name = "brokenWall";
@@ -27,7 +15,7 @@ public class BreakableWall : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
         Rigidbody[] children = transform.GetComponentsInChildren<Rigidbody>();
-        foreach(Rigidbody child in children)
+        foreach (Rigidbody child in children)
         {
             child.transform.parent = transform.parent;
             child.gameObject.GetComponent<BoxCollider>().enabled = true;

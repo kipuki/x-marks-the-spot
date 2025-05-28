@@ -36,31 +36,31 @@ public class BoatControl : MonoBehaviour
                 playerCamera.enabled = true;
                 boatCamera.enabled = false;
                 GameObject player = playerCamera.transform.parent.gameObject;
-                player.SendMessage("setSpawnPosition", boatCamera.gameObject.transform.position);
-                player.SendMessage("respawn");
+                player.SendMessage("SetSpawnPosition", boatCamera.gameObject.transform.position);
+                player.SendMessage("Respawn");
                 this.enabled = false;
             }
         }
     }
 
-    private void startMoving()
+    private void StartMoving()
     {
         gameObject.name = "usedBoat";
         moveBoat = true;
     }
 
-    public void rideBoat()
+    public void RideBoat()
     {
         used = true;
         playerCamera = playerObject.transform.GetChild(0).GetComponent<Camera>();
         boatCamera.enabled = true;
         playerCamera.enabled = false;
-        playerObject.SendMessage("disableCharacter");
-        TextHintHandler.showHint(new TextHint("The key worked! Onto the other island.", 2));
+        playerObject.SendMessage("DisableCharacter");
+        TextHintHandler.ShowHint(new TextHint("The key worked! Onto the other island.", 2));
 
         // To disable the trigger.
         gameObject.GetComponent<BoxCollider>().enabled = false;
-        Invoke("startMoving", 1.5f);
+        Invoke("StartMoving", 1.5f);
     }
 
     void OnTriggerEnter(Collider col)
@@ -72,7 +72,7 @@ public class BoatControl : MonoBehaviour
                 playerObject = col.gameObject;
                 (gameObject.GetComponent("ProximityPrompt") as MonoBehaviour).enabled = true;
             } else
-                TextHintHandler.showHint(new TextHint("I need a key to start the engine.", 1, 7));
+                TextHintHandler.ShowHint(new TextHint("I need a key to start the engine.", 1, 7));
         }
     }
 }

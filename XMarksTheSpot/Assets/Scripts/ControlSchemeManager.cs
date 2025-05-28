@@ -94,7 +94,7 @@ public class ControlSchemeManager : MonoBehaviour
 
             case "Gamepad":
                 isGamepad = true;
-                controlScheme = getGamepadControlScheme();
+                controlScheme = GetGamepadControlScheme();
                 break;
 
             default:
@@ -115,7 +115,7 @@ public class ControlSchemeManager : MonoBehaviour
         onControlSchemeChanged?.Invoke();
     }
 
-    private ControlScheme getGamepadControlScheme()
+    private ControlScheme GetGamepadControlScheme()
     {
         Gamepad gamepad = Gamepad.current;
         if (gamepad == null)

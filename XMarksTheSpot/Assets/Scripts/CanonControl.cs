@@ -140,28 +140,24 @@ public class CanonControl : MonoBehaviour
 
         if (shouldFireCannon)
         {
-            StartCoroutine("fireCannon");
+            StartCoroutine(FireCannon());
             shouldFireCannon = false;
         }
     }
 
-    public void setRotationSpeed(int newRotationSpeed)
+    public void ExitCannon()
     {
-        rotationSpeed = newRotationSpeed;
-    }
-
-    public void exitCannon()
-    {
-        ControlSchemeManager.onControlSchemeChanged -= showInstructionText;
-        TextHintHandler.showHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
+        ControlSchemeManager.onControlSchemeChanged -= ShowInstructionText;
+        TextHintHandler.ShowHint(new TextHint("What a bang! That seems to have done it. Into the tunnel I go!", 1, 8));
         StopAllCoroutines();
         canFire = false;
-        StartCoroutine(exitCannon(6));
+        rotationSpeed = 0;
+        StartCoroutine(ExitCannonAfterSeconds(6));
     }
 
-    IEnumerator exitCannon(float delay)
+    IEnumerator ExitCannonAfterSeconds(float delaySeconds)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delaySeconds);
         crosshair.enabled = false;
         canonCamera.enabled = false;
         
@@ -177,21 +173,21 @@ public class CanonControl : MonoBehaviour
         if (occupyingPlayer != null)
         {
             occupyingPlayer.transform.parent = null;
-            occupyingPlayer.enableCharacter();
-            occupyingPlayer.SendMessage("setSpawnPosition", checkpointSpawnPosition);
+            occupyingPlayer.EnableCharacter();
+            occupyingPlayer.SendMessage("SetSpawnPosition", checkpointSpawnPosition);
             occupyingPlayer = null;
         }
     }
 
-    private void showInstructionText()
+    private void ShowInstructionText()
     {
         string rotateHint = GetRotateHintSprite();
         string fireHint = GetFireHintSprite();
 
-        TextHintHandler.showHint(new TextHint($"Rotate the cannon with {rotateHint} then press {fireHint} to fire", 1, null));
+        TextHintHandler.ShowHint(new TextHint($"Rotate the cannon with {rotateHint} then press {fireHint} to fire", 1, null));
     }
 
-    public void controlCanon()
+    public void ControlCanon()
     {
         // Set occupying player
         occupyingPlayer = PlayerController.mainController;
@@ -200,17 +196,17 @@ public class CanonControl : MonoBehaviour
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         canonCamera.enabled = true;
 
-        playerCamera = occupyingPlayer.getCamera();
+        playerCamera = occupyingPlayer.GetCamera();
         playerCamera.enabled = false;
 
         // Disable character controller.
-        occupyingPlayer.disableCharacter();
+        occupyingPlayer.DisableCharacter();
 
         crosshair.enabled = true;
         occupyingPlayer.transform.parent = gameObject.transform;
 
-        ControlSchemeManager.onControlSchemeChanged += showInstructionText;
-        showInstructionText();
+        ControlSchemeManager.onControlSchemeChanged += ShowInstructionText;
+        ShowInstructionText();
     }
 
     // Helps automatically align the cannon to face a wall. (Used for camera shots)
@@ -278,7 +274,7 @@ public class CanonControl : MonoBehaviour
         SpawnCannonball(launcher.transform.position, launcher.transform.rotation, launcher.transform.forward * cannonBallVelocity);
     }
 
-    IEnumerator fireCannon()
+    IEnumerator FireCannon()
     {
         if (canFire)
         {

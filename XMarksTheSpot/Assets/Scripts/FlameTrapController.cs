@@ -16,16 +16,10 @@ public class FlameTrapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("cycleFlames");
+        StartCoroutine(CycleFlames());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void turnOn()
+    public void TurnOn()
     {
         Transform[] children = transform.GetComponentsInChildren<Transform>();
         foreach (Transform child in children)
@@ -37,7 +31,7 @@ public class FlameTrapController : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
     }
 
-    public void turnOff()
+    public void TurnOff()
     {
         GetComponent<BoxCollider>().enabled = false;
         Transform[] children = transform.GetComponentsInChildren<Transform>();
@@ -49,30 +43,30 @@ public class FlameTrapController : MonoBehaviour
         }
     }
 
-    IEnumerator cycleFlames()
+    IEnumerator CycleFlames()
     {
         while (this.enabled)
         {
             yield return new WaitForSeconds(flameCooldown);
-            turnOn();
+            TurnOn();
             yield return new WaitForSeconds(flameDuration);
-            turnOff();
+            TurnOff();
         }
     }
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.tag == "Player")
-        {
-            if (canDamage)
-                StartCoroutine("damagePlayer");
-        }
+        if (col.gameObject.tag != "Player")
+            return;
+            
+        if (canDamage)
+            StartCoroutine(DamagePlayer());
     }
 
-    IEnumerator damagePlayer()
+    IEnumerator DamagePlayer()
     {
         canDamage = false;
-        PlayerController.damagePlayer((int)(damage * UserSettings.getDifficultyMultiplier()));
+        PlayerController.DamagePlayer((int)(damage * UserSettings.GetDifficultyMultiplier()));
         yield return new WaitForSeconds(damageCooldown);
         canDamage = true;
     }

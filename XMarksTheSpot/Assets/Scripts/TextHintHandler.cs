@@ -22,47 +22,48 @@ public class TextHintHandler : MonoBehaviour {
         mainTextHintHandler = this;
 	}
 
-    public void setHint(string message)
+    public void SetHint(string message)
     {
-        TextHintHandler.showHint(message);
+        TextHintHandler.ShowHint(message);
     }
 
-    public void setHint(TextHint hintData)
+    public void SetHint(TextHint hintData)
     {
-        TextHintHandler.showHint(hintData);
+        TextHintHandler.ShowHint(hintData);
     }
 
-    private static void waitForInitialization()
+    public static void ShowHint(string message)
     {
-        while (mainTextHintHandler == null);
+        ShowHint(new TextHint(message));
     }
 
-    public static void showHint(string message)
+    public static void ShowHint(TextHint hintData)
     {
-        showHint(new TextHint(message));
-    }
+        if (mainTextHintHandler == null)
+            return;
 
-    public static void showHint(TextHint hintData)
-    {
-        waitForInitialization();
-        if (currentHint == null || hintData.getPriority() >= currentHint.getPriority())
+        if (currentHint == null || hintData.GetPriority() >= currentHint.GetPriority())
         {
-            cancelCoroutine();
-            currentCoroutine = playHint(hintData);
+            CancelCoroutine();
+            currentCoroutine = PlayHint(hintData);
             mainTextHintHandler.StartCoroutine(currentCoroutine);
         }
     }
 
-    public static void cancelHint()
+    public static void CancelHint()
     {
-        waitForInitialization();
+        if (mainTextHintHandler == null)
+            return;
+        
         if (textDisplay.enabled)
             textDisplay.enabled = false;        
     }
 
-    static private void cancelCoroutine()
+    static private void CancelCoroutine()
     {
-        waitForInitialization();
+        if (mainTextHintHandler == null)
+            return;
+        
         if (currentCoroutine != null)
         {
             mainTextHintHandler.StopCoroutine(currentCoroutine);
@@ -71,18 +72,18 @@ public class TextHintHandler : MonoBehaviour {
         currentHint = null;
     }
 
-    static private IEnumerator playHint(TextHint hintData)
+    static private IEnumerator PlayHint(TextHint hintData)
     {
         currentHint = hintData;
-        textDisplay.text = hintData.getMessage();
+        textDisplay.text = hintData.GetMessage();
         textDisplay.enabled = true;
 
-        float? duration = hintData.getDuration();
+        float? duration = hintData.GetDuration();
         if (duration != null)
         {
             yield return new WaitForSeconds(duration.Value);
             textDisplay.enabled = false;
-            cancelCoroutine();
+            CancelCoroutine();
         }
         
         yield return null;
@@ -107,17 +108,17 @@ public class TextHint {
 
         public TextHint(string message) : this(message, 1, 4) {}
         
-        public string getMessage()
+        public string GetMessage()
         {
             return message;
         }
 
-        public int getPriority()
+        public int GetPriority()
         {
             return priority;
         }
 
-        public float? getDuration()
+        public float? GetDuration()
         {
             return duration;
         }

@@ -5,23 +5,12 @@ using UnityEngine;
 public class SpikeDamage : MonoBehaviour
 {
     public int damage = 100;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            PlayerController.damagePlayer((int)(damage*UserSettings.getDifficultyMultiplier()));
+            PlayerController.DamagePlayer((int)(damage*UserSettings.GetDifficultyMultiplier()));
         }
     }
 }

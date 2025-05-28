@@ -6,7 +6,7 @@ using UnityEngine;
 public class Cannonball : MonoBehaviour
 {
     // Start is called before the first frame update
-    public void destroyCannonball()
+    public void DestroyCannonball()
     {
         ParticleSystem particleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
         // Set particle to root

@@ -13,57 +13,57 @@ public static class UserSettings
 
     private static AudioMixer mixer;
 
-    private static float convertToDB(float volume)
+    private static float ConvertToDB(float volume)
     {
         return (volume*80)-80;
     }
 
-    public static void setAudioMixer(AudioMixer mixer)
+    public static void SetAudioMixer(AudioMixer mixer)
     {
         UserSettings.mixer = mixer;
         Debug.Log("Mixer set.");
     }
 
 
-    public static void setMasterVolume(float masterVolume)
+    public static void SetMasterVolume(float masterVolume)
     {
         UserSettings.masterVolume = masterVolume;
-        mixer.SetFloat("Master", convertToDB(masterVolume));
+        mixer.SetFloat("Master", ConvertToDB(masterVolume));
     }
 
-    public static void setMusicVolume(float musicVolume)
+    public static void SetMusicVolume(float musicVolume)
     {
         UserSettings.musicVolume = musicVolume;
-        mixer.SetFloat("Music", convertToDB(musicVolume));
+        mixer.SetFloat("Music", ConvertToDB(musicVolume));
     }
 
-    public static void setSFXVolume(float sfxVolume)
+    public static void SetSFXVolume(float sfxVolume)
     {
         UserSettings.sfxVolume = sfxVolume;
-        mixer.SetFloat("SFX", convertToDB(sfxVolume));
+        mixer.SetFloat("SFX", ConvertToDB(sfxVolume));
     }
 
-    public static void setDifficultyMultiplier(float difficultyMultiplier)
+    public static void SetDifficultyMultiplier(float difficultyMultiplier)
     {
         UserSettings.difficultyMultiplier = difficultyMultiplier;
     }
 
-    public static float getMasterVolume()
+    public static float GetMasterVolume()
     {
         return masterVolume;
     }
 
-    public static float getMusicVolume()
+    public static float GetMusicVolume()
     {
         return musicVolume;
     }
 
-    public static float getSFXVolume()
+    public static float GetSFXVolume()
     {
         return sfxVolume;
     }
 
-    public static float getDifficultyMultiplier()
+    public static float GetDifficultyMultiplier()
     {
         return difficultyMultiplier;
     }

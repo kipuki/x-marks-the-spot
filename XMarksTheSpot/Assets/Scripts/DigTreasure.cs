@@ -16,13 +16,7 @@ public class DigTreasure : MonoBehaviour
         deltaVector = targetVector - transform.localPosition;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void digOut()
+    public void DigOut()
     {
         transform.parent.name = "treasureSpot";
         timesDug++;
@@ -31,7 +25,7 @@ public class DigTreasure : MonoBehaviour
         {
             GetComponentInParent<ProximityPrompt>().disableAfterUse = true;
             GetComponentInChildren<CapsuleCollider>().enabled = true;
-            TextHintHandler.showHint(new TextHint("At last I have found the treasure! Lets open it.",2,5));
+            TextHintHandler.ShowHint(new TextHint("At last I have found the treasure! Lets open it.",2,5));
         }
     }
 }

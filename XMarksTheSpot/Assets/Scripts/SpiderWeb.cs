@@ -12,8 +12,8 @@ public class SpiderWeb : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         if (col.gameObject.tag == "Player")
         {
-            PlayerController.damagePlayer(damage);
-            PlayerController.speedDebuff(speedDebuff, 4);
+            PlayerController.DamagePlayer(damage);
+            PlayerController.SpeedDebuff(speedDebuff, 4);
             Destroy(gameObject);
         } else {
             Destroy(gameObject, 0.5f);

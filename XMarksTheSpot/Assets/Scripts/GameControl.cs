@@ -33,17 +33,17 @@ public class GameControl : MonoBehaviour
         return "Unknown";
     }
 
-    private void updateExitText()
+    private void UpdateExitText()
     {
         string hint = GetRelevantHintSprite();
         exitText.text = $"Press {hint} to return to Main Menu";
     }
 
-    public void goToMainMenu()
+    public void GoToMainMenu()
     {
-        ControlSchemeManager.onControlSchemeChanged -= updateExitText;
+        ControlSchemeManager.onControlSchemeChanged -= UpdateExitText;
         Debug.Log("Going to main menu");
-        SceneSwitcher.loadScene("mainMenu");
+        SceneSwitcher.LoadScene("mainMenu");
     }
 
     private void Awake()
@@ -52,26 +52,26 @@ public class GameControl : MonoBehaviour
         controls.VictoryScreen.Quit.started += ctx =>
         {
             if (completedGame)
-                goToMainMenu();
+                GoToMainMenu();
         };
     }
 
-    public void gameFinish()
+    public void GameFinish()
     {
         if (completedGame)
             return;
 
         completedGame = true;
-        if (UserSettings.getDifficultyMultiplier() < 1.5f)
+        if (UserSettings.GetDifficultyMultiplier() < 1.5f)
             finishText.text = "Great Job! You recovered the treasure. That was a good haul. Try again with higher difficulty!";
         scoreText.text = "Score: " + PlayerController.points;
         hudDisplay.gameObject.SetActive(false);
         finishPanel.gameObject.SetActive(true);
-        PlayerController.mainController.getCamera().transform.parent = transform.parent;
-        PlayerController.mainController.getPlayer().SetActive(false);
-        TextHintHandler.cancelHint();
+        PlayerController.mainController.GetCamera().transform.parent = transform.parent;
+        PlayerController.mainController.GetPlayer().SetActive(false);
+        TextHintHandler.CancelHint();
         controls.Enable();
-        ControlSchemeManager.onControlSchemeChanged += updateExitText;
-        updateExitText();
+        ControlSchemeManager.onControlSchemeChanged += UpdateExitText;
+        UpdateExitText();
     }
 }

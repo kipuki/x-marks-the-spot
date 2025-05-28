@@ -15,23 +15,23 @@ public class TidyObject : MonoBehaviour {
 	void Start ()
 	{
 		if (shrinkBeforeRemove)
-			StartCoroutine(shrinkAfterRemoveTime());
+			StartCoroutine(ShrinkAfterRemoveTime());
 		else
 			Destroy(gameObject, removeTime);
 	}
 
 	void Update()
 	{
-		if (shrink)
-		{
-			if (!transform.localScale.Equals(shrinkLimit))
-				transform.localScale = Vector3.MoveTowards(transform.localScale, shrinkLimit, shrinkRate * Time.deltaTime);
-			else
-				Destroy(gameObject);
-		}
+		if (!shrink)
+			return;
+		
+		if (!transform.localScale.Equals(shrinkLimit))
+			transform.localScale = Vector3.MoveTowards(transform.localScale, shrinkLimit, shrinkRate * Time.deltaTime);
+		else
+			Destroy(gameObject);
 	}
 
-	IEnumerator shrinkAfterRemoveTime()
+	IEnumerator ShrinkAfterRemoveTime()
 	{
 		yield return new WaitForSeconds(removeTime);
 		shrink = true;

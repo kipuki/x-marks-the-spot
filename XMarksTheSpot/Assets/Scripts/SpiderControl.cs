@@ -54,7 +54,7 @@ public class SpiderControl : MonoBehaviour
 
         RaycastHit hit;
         if (Physics.Raycast(launcher.position, (targetTransform.position - launcher.position).normalized, out hit, attackRange) && (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject == target))
-            StartCoroutine("FireWeb");
+            StartCoroutine(FireWeb());
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class SpiderControl : MonoBehaviour
         web.transform.localScale *= webSize;
         web.transform.LookAt(targetTransform.position);
         web.name = "web";
-        web.linearVelocity = web.transform.forward  * webSpeed * UserSettings.getDifficultyMultiplier();
+        web.linearVelocity = web.transform.forward  * webSpeed * UserSettings.GetDifficultyMultiplier();
         web.angularVelocity = webAngularVelocity;
         TrailRenderer trail = web.GetComponent<TrailRenderer>();
         trail.widthMultiplier = web.transform.localScale.magnitude / 2;

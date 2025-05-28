@@ -28,12 +28,15 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player") {
-            col.SendMessage("addPoints", value);
-            if(collectEffect)
-			    Instantiate(collectEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        if (col.gameObject.tag != "Player")
+            return;
+
+        col.SendMessage("AddPoints", value);
+        
+        if (collectEffect)
+            Instantiate(collectEffect, transform.position, Quaternion.identity);
+        
+        Destroy(gameObject);
     }
 
 }

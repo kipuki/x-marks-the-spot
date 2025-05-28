@@ -26,25 +26,22 @@ public class TidyProjectile : MonoBehaviour, TouchesWater
         Destroy(gameObject, maximumLifeTime);
     }
 
-    private void checkDespawnConditions()
+    private void CheckDespawnConditions()
     {
-        // Debug.Log("Invisible: "+ invisible);
-        // Debug.Log("Touched Water: "+ touchedWater);
         if (invisible && (touchedWater || !hasToTouchWater))
             Destroy(gameObject);
     }
 
     public void OnTouchedWater()
     {
-        // Debug.Log("Touched water");
         touchedWater = true;
-        checkDespawnConditions();
+        CheckDespawnConditions();
     }
 
     void OnBecameInvisible()
     {
         invisible = true;
-        checkDespawnConditions();
+        CheckDespawnConditions();
     }
 
     void OnBecameVisible()
@@ -52,7 +49,7 @@ public class TidyProjectile : MonoBehaviour, TouchesWater
         invisible = false;
     }
 
-    public GameObject getCollidedObject()
+    public GameObject GetCollidedObject()
     {
         return collidedObject;
     }

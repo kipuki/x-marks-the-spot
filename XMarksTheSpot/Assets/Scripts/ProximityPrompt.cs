@@ -18,7 +18,7 @@ public class ProximityPrompt : MonoBehaviour
     void Awake()
     {
         controls = new PlayerControls();
-        m_OnPromptTriggered = ctx => action();
+        m_OnPromptTriggered = ctx => Action();
     }
 
     private void OnEnable()
@@ -28,38 +28,38 @@ public class ProximityPrompt : MonoBehaviour
 
     void OnDisable()
     {
-        hideMessage();
+        HideMessage();
         controls.Disable();
     }
 
-    void action()
+    void Action()
     {
         onInteract.Invoke();
 
         if (!disableAfterUse)
             return;
 
-        hideMessage();
+        HideMessage();
         this.enabled = false;
     }
 
-    void showMessage()
+    void ShowMessage()
     {
         if (isShowingMessage)
             return;
 
-        InteractDisplay.enableInteract(interactionMessage);
+        InteractDisplay.EnableInteract(interactionMessage);
         isShowingMessage = true;
 
         controls.Player.Interact.started += m_OnPromptTriggered;
     }
 
-    void hideMessage()
+    void HideMessage()
     {
         if (!isShowingMessage)
             return;
 
-        InteractDisplay.disableInteract();
+        InteractDisplay.DisableInteract();
         isShowingMessage = false;
 
         controls.Player.Interact.started -= m_OnPromptTriggered;
@@ -69,23 +69,23 @@ public class ProximityPrompt : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if (this.enabled && col.gameObject.tag == "Player" && !hasToFaceObject)
-            showMessage();
+            ShowMessage();
     }
 
     void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "Player")
-            hideMessage();
+            HideMessage();
     }
 
     void OnTriggerStay(Collider col)
     {
         if (this.enabled && hasToFaceObject && col.gameObject.tag == "Player")
         {
-            if (PlayerController.mainController.checkIfFacing(gameObject))
-                showMessage();
+            if (PlayerController.mainController.CheckIfFacing(gameObject))
+                ShowMessage();
             else
-                hideMessage();
+                HideMessage();
         }
     }
 }
