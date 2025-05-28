@@ -12,6 +12,8 @@ public class BoatControl : MonoBehaviour
 
     public Vector3 destination;
 
+    public float boatSpeed = 10f;
+
     private GameObject playerObject;
 
     // public TMPro.TextMeshProUGUI textHints;
@@ -29,7 +31,7 @@ public class BoatControl : MonoBehaviour
         if (moveBoat)
         {
             if (!transform.position.Equals(destination)) {
-                transform.position = Vector3.MoveTowards(transform.position, destination, 10f * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, destination, boatSpeed * Time.deltaTime);
             }
             else {
                 moveBoat = false;
