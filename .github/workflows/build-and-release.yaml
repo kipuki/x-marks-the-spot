@@ -124,6 +124,7 @@ jobs:
           projectPath: ${{ env.PROJECT_PATH }}
           buildName: ${{ env.BUILD_NAME }}
           buildsPath: .
+          allowDirtyBuild: true
 
       # Archive the Build
       - name: Archive ${{ matrix.name }} Build
