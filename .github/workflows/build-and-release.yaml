@@ -108,11 +108,11 @@ jobs:
         uses: actions/checkout@v3
 
       # Cache Unity Library
-      - name: Cache Unity Library folder
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.PROJECT_PATH }}/Library  # Cache Unity Library folder
-          key: ${{ runner.os }}-unity-${{ needs.run-tests.outputs.latest_commit }}
+      # - name: Cache Unity Library folder
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ${{ env.PROJECT_PATH }}/Library  # Cache Unity Library folder
+      #     key: ${{ runner.os }}-unity-${{ needs.run-tests.outputs.latest_commit }}
 
       # Build the game project
       - name: Create ${{ matrix.name }} Build
@@ -124,7 +124,6 @@ jobs:
           projectPath: ${{ env.PROJECT_PATH }}
           buildName: ${{ env.BUILD_NAME }}
           buildsPath: .
-          allowDirtyBuild: true
 
       # Archive the Build
       - name: Archive ${{ matrix.name }} Build
